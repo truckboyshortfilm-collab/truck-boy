@@ -1,34 +1,53 @@
 const CACHE = 'truckboy-v1';
-const FILES = [
+
+const STATIC = [
+  './icon-192.png',
+  './icon-512.png',
+  './icon-1024.png',
+  './manifest.json',
+];
+
+const PAGES = [
   './拍攝總表.html',
   './day1.html',
   './day2.html',
   './day3.html',
   './day4.html',
   './day5.html',
-  './製片工作清單.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap'
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(c => c.addAll([...PAGES, ...STATIC]))
+      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
+  e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => cached))
-  );
+  const req = e.request;
+  const isPage = PAGES.some(p => req.url.includes(p.replace('./', ''))) || req.url.endsWith('.html');
+
+  if (isPage) {
+    // HTML：有網路先抓新版並更新快取，沒網路才用快取
+    e.respondWith(
+      fetch(req).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(req, clone));
+        return res;
+      }).catch(() => caches.match(req))
+    );
+  } else {
+    // 圖片/字型等靜態資源：快取優先
+    e.respondWith(
+      caches.match(req).then(cached => cached || fetch(req).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(req, clone));
+        return res;
+      }))
+    );
+  }
 });
