@@ -1,0 +1,27 @@
+{
+  "name": "貨車男孩 通告單",
+  "short_name": "貨車男孩",
+  "description": "《貨車男孩》拍攝通告單",
+  "start_url": "./拍攝總表.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E8A838",
+  "theme_color": "#E8A838",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
