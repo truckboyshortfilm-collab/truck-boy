@@ -774,6 +774,19 @@
       background: var(--amber-lt);
       transform: translateY(-2px);
     }
+  
+    /* ─── 場次備註欄 ──────────────────────────────────── */
+    .r-note td { padding: 4px 12px 10px !important; background: #FFFDF5 !important; border-bottom: 1px solid var(--border-sm) !important; }
+    .note-ta, .sc-note-ta {
+      width: 100%; box-sizing: border-box;
+      border: 1px solid var(--border); padding: 6px 10px;
+      font-size: 12px; font-family: "Noto Sans TC", sans-serif;
+      color: var(--text); background: #fff;
+      resize: none; min-height: 28px; line-height: 1.6; overflow: hidden;
+    }
+    .note-ta:focus, .sc-note-ta:focus { outline: none; border-color: var(--amber); }
+    .note-ta::placeholder, .sc-note-ta::placeholder { color: var(--muted); }
+    .sc-note { padding: 8px 0 4px; }
   </style>
 </head>
 <body>
@@ -1933,6 +1946,39 @@
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("./sw.js");
     }
+  </script>
+  <script>
+  (function(){
+    var DAY = (location.pathname.match(/day(\d)/) || ['','0'])[1];
+    function key(s){ return 'note-d'+DAY+'-'+s.replace(/\s/g,''); }
+    function makeTA(k, cls, ph){
+      var ta = document.createElement('textarea');
+      ta.className = cls; ta.placeholder = ph;
+      ta.value = localStorage.getItem(k) || '';
+      function resize(){ ta.style.height='auto'; ta.style.height=ta.scrollHeight+'px'; }
+      ta.addEventListener('input', function(){ localStorage.setItem(k, ta.value); resize(); });
+      setTimeout(resize, 0);
+      return ta;
+    }
+    document.querySelectorAll('tr.r-shoot').forEach(function(row){
+      var sc = row.querySelector('.t-scene');
+      if(!sc) return;
+      var tr = document.createElement('tr');
+      tr.className = 'r-note';
+      var td = document.createElement('td');
+      td.colSpan = row.querySelectorAll('td').length || 8;
+      td.appendChild(makeTA(key(sc.textContent.trim()), 'note-ta', '📝 場次備註...'));
+      tr.appendChild(td); row.after(tr);
+    });
+    document.querySelectorAll('.sc-mcard').forEach(function(card){
+      var nm = card.querySelector('.sc-mnum');
+      if(!nm) return;
+      var div = document.createElement('div');
+      div.className = 'sc-note';
+      div.appendChild(makeTA(key(nm.textContent.trim()), 'sc-note-ta', '📝 場次備註...'));
+      card.appendChild(div);
+    });
+  })();
   </script>
 </body>
 </html>
