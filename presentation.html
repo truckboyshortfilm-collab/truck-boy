@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>貨車男孩｜製作簡報</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:   #D4960C;
+      --amber:  #A06800;
+      --amber-lt: #E8A020;
+      --dark:   #0D0800;
+      --dark2:  #1A0E04;
+      --cream:  #FDF8F0;
+      --red:    #C03208;
+      --blue:   #1A6A9E;
+      --green:  #1E7A40;
+      --text:   #1A0E04;
+      --sub:    #4A3A28;
+      --muted:  #8A7A60;
+      --border: rgba(0,0,0,.12);
+      --white:  #FFFFFF;
+      --off-white: #FFFBF5;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+
+    /* ── SLIDE ──────────────────────────── */
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+    }
+
+    /* ── NAV DOTS ───────────────────────── */
+    #nav-dots {
+      position: fixed;
+      right: 24px; top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    #nav-dots a {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: rgba(212,150,12,.2);
+      border: 2px solid rgba(212,150,12,.45);
+      display: block;
+      transition: background .25s, transform .25s;
+      title: attr(title);
+    }
+    #nav-dots a.active,
+    #nav-dots a:hover {
+      background: var(--gold);
+      transform: scale(1.45);
+    }
+    @media (max-width: 700px) {
+      #nav-dots { right: 10px; }
+    }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ────────────────────────── */
+    #topnav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--dark);
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center;
+      padding: 0 20px; gap: 0;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-brand {
+      font-size: 13px; font-weight: 900;
+      color: var(--gold); letter-spacing: .08em;
+      padding: 14px 20px 14px 0;
+      white-space: nowrap; border-right: 1px solid rgba(255,255,255,.1);
+      margin-right: 4px; flex-shrink: 0;
+    }
+    .nav-link {
+      color: rgba(255,255,255,.55); text-decoration: none;
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      padding: 14px 14px; white-space: nowrap;
+      transition: color .15s;
+      flex-shrink: 0;
+    }
+    .nav-link:hover { color: var(--gold); }
+    .nav-link.day-link { color: rgba(255,255,255,.4); }
+    .nav-link.wrap-link { color: rgba(192,50,8,.7); }
+    .nav-link.wrap-link:hover { color: var(--red); }
+
+    /* ── WRAP ───────────────────────── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── SECTION PANELS ─────────────── */
+    .sp { background: var(--white); margin-bottom: 2px; }
+    .sp-cream { background: var(--off-white); margin-bottom: 2px; }
+    .sp-dark { background: var(--dark2); color: var(--cream); margin-bottom: 2px; }
+    .sp-pad { padding: 40px 0 44px; }
+
+    /* ── CHAPTER BANNER (每天大標題) ── */
+    .chapter {
+      background: var(--dark);
+      color: var(--cream);
+      padding: 70px 20px 60px;
+      position: relative; overflow: hidden;
+      margin-bottom: 2px;
+    }
+    .chapter::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,150,12,.04) 40px, rgba(212,150,12,.04) 42px);
+      pointer-events: none;
+    }
+    .chapter-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .chapter-daynum {
+      font-size: clamp(80px,14vw,140px); font-weight: 900;
+      color: rgba(212,150,12,.18); line-height: 1; letter-spacing: -.04em;
+      position: absolute; right: 40px; bottom: -10px; pointer-events: none;
+      user-select: none;
+    }
+    .chapter-label {
+      font-size: 10px; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 700; margin-bottom: 10px;
+    }
+    .chapter-title {
+      font-size: clamp(26px,5vw,48px); font-weight: 900; line-height: 1.1;
+    }
+    .chapter-sub {
+      margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.5);
+      letter-spacing: .08em;
+    }
+    .chapter-meta {
+      margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .chapter-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      background: rgba(212,150,12,.15); color: var(--gold);
+      border: 1px solid rgba(212,150,12,.3); padding: 4px 12px; border-radius: 20px;
+    }
+    .chapter.wrap-chapter { background: #1E0400; }
+    .chapter.wrap-chapter .chapter-tag { background: rgba(192,50,8,.2); color: #F07050; border-color: rgba(192,50,8,.4); }
+
+    /* ── SH (section heading) ────────── */
+    .sh { padding: 32px 0 16px; border-bottom: 2px solid var(--gold); margin-bottom: 24px; }
+    .sh h2 { font-size: 16px; font-weight: 900; letter-spacing: .08em; }
+
+    /* ── SCHEDULE TABLE ─────────────── */
+    .sch-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px; }
+    table.sch { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.sch thead tr { background: var(--dark2); color: var(--cream); }
+    table.sch thead th { padding: 10px 10px; text-align: left; font-size: 11px; letter-spacing: .06em; font-weight: 700; white-space: nowrap; }
+    table.sch tbody tr { border-bottom: 1px solid rgba(0,0,0,.06); }
+    table.sch tbody tr:last-child { border-bottom: none; }
+    table.sch td { padding: 9px 10px; vertical-align: top; line-height: 1.5; }
+    .t-time { white-space: nowrap; font-size: 12px; color: var(--muted); font-weight: 500; }
+    .t-scene { font-weight: 900; font-size: 13px; color: var(--amber); white-space: nowrap; }
+    .t-loc { font-size: 12px; font-weight: 700; }
+    .t-tc, .t-pg { font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .t-desc { font-size: 12px; line-height: 1.6; }
+    .t-cast { font-size: 11px; white-space: nowrap; }
+    .r-prep td { background: #F8F4ED; }
+    .r-shoot td { background: var(--white); }
+    .r-props td { background: #FAFAFA; padding: 6px 10px 10px; }
+    .r-wrap td { background: #1A0E04; color: var(--cream); }
+    .sb { display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: .08em; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+    .sb-prep  { background: rgba(160,104,0,.12); color: var(--amber); }
+    .sb-shoot { background: rgba(30,122,64,.12); color: var(--green); }
+    .sb-lunch { background: rgba(26,106,158,.12); color: var(--blue); }
+    .sb-wrap  { background: rgba(192,50,8,.15); color: var(--red); }
+    .props-note { font-size: 11px; color: var(--sub); line-height: 1.9; }
+    .props-note-new { font-size: 11px; color: var(--sub); line-height: 1.9; }
+    .pn-tag { display: inline-block; background: rgba(0,0,0,.06); font-size: 9px; font-weight: 700; letter-spacing: .06em; padding: 1px 6px; border-radius: 3px; margin-right: 3px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: .05em; }
+    .t-dawn  { background: rgba(100,160,220,.15); color: #1A6A9E; }
+    .t-day   { background: rgba(240,180,0,.15); color: #7A5000; }
+    .t-night { background: rgba(50,50,120,.15); color: #4040A0; }
+    .t-int   { background: rgba(0,0,0,.06); color: #444; }
+    .t-ext   { background: rgba(0,160,80,.1); color: #1E7A40; }
+
+    /* ── CAST TABLE ─────────────────── */
+    table.ct { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    table.ct thead tr { background: var(--dark2); color: var(--cream); }
+    table.ct thead th { padding: 10px 14px; text-align: left; font-size: 11px; letter-spacing: .06em; }
+    table.ct tbody tr { border-bottom: 1px solid rgba(0,0,0,.06); }
+    table.ct tbody tr:last-child { border-bottom: none; }
+    table.ct tbody tr:nth-child(even) { background: var(--off-white); }
+    table.ct td { padding: 10px 14px; }
+    .on { display: inline-block; background: rgba(30,122,64,.1); color: var(--green); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+    .vo { display: inline-block; background: rgba(26,106,158,.1); color: var(--blue); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+
+    /* ── TRANSPORT TABLE ────────────── */
+    .transport-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; }
+    table.transport-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.transport-table thead tr { background: var(--dark2); color: var(--cream); }
+    table.transport-table thead th { padding: 10px 12px; text-align: left; font-size: 11px; letter-spacing: .06em; font-weight: 700; }
+    table.transport-table tbody tr { border-bottom: 1px solid rgba(0,0,0,.06); }
+    table.transport-table tbody tr:last-child { border-bottom: none; }
+    table.transport-table tbody tr:nth-child(even) { background: var(--off-white); }
+    table.transport-table td { padding: 9px 12px; }
+    .car-id { font-family: monospace; font-size: 12px; letter-spacing: .06em; font-weight: 700; color: var(--amber); }
+    .car-pending { color: var(--muted); }
+
+    /* ── COSTUME PHOTOS ─────────────── */
+    .costume-section { margin-bottom: 28px; }
+    .costume-title {
+      font-size: 13px; font-weight: 900; color: var(--amber);
+      letter-spacing: .12em; border-bottom: 1px solid var(--border);
+      padding-bottom: 6px; margin-bottom: 14px;
+    }
+    .si-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; }
+    .cg2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .si-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .si-card img { width: 100%; height: auto; display: block; }
+    .si-label { padding: 10px 12px; }
+    .si-label .sn { font-size: 10px; font-weight: 900; color: var(--amber); letter-spacing: .1em; margin-bottom: 2px; }
+    .si-label .st { font-size: 13px; font-weight: 700; }
+    .si-label .sd { font-size: 12px; color: var(--muted); }
+    .noimg { display: flex; align-items: center; justify-content: center; height: 120px; background: #F0EDE8; color: var(--muted); font-size: 20px; }
+    @media (max-width: 700px) {
+      .cg2 { grid-template-columns: 1fr; }
+      .si-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── ROOM GRID (住宿) ───────────── */
+    .room-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; font-size: 12px; color: var(--muted); }
+    .room-meta a { color: var(--blue); text-decoration: none; }
+    .room-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 12px; }
+    .room-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .room-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--dark2); }
+    .room-name { font-size: 14px; font-weight: 900; color: var(--gold); }
+    .room-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 2px 8px; border-radius: 20px; }
+    .room-tag.f { background: rgba(200,50,150,.15); color: #B03090; }
+    .room-tag.m { background: rgba(26,106,158,.15); color: var(--blue); }
+    .room-tag.s { background: rgba(212,150,12,.15); color: var(--gold); }
+    .room-body { padding: 10px 12px; }
+    .room-person { display: flex; flex-wrap: wrap; gap: 6px; }
+    .room-person span { font-size: 12px; background: rgba(0,0,0,.05); padding: 3px 8px; border-radius: 4px; }
+    .room-person .empty { color: var(--muted); }
+
+    /* ── WEATHER TABLE ──────────────── */
+    .weather-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+    table.weather-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.weather-table thead tr { background: var(--dark2); color: var(--cream); }
+    table.weather-table thead th { padding: 9px 14px; text-align: left; font-size: 11px; letter-spacing: .06em; }
+    table.weather-table tbody tr { border-bottom: 1px solid rgba(0,0,0,.06); }
+    table.weather-table tbody tr:last-child { border-bottom: none; }
+    table.weather-table tbody td { padding: 9px 14px; }
+    .w-today td { background: rgba(212,150,12,.08); font-weight: 700; }
+    .w-rain-mid { color: #B06000; font-weight: 700; }
+    .w-rain-high { color: var(--red); font-weight: 700; }
+
+    /* ── LOC PHOTOS ─────────────────── */
+    .loc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; margin-bottom: 12px; }
+    .loc-card img { width: 100%; height: 160px; object-fit: cover; display: block; border-radius: 6px; }
+    .loc-card-label { font-size: 11px; color: var(--muted); padding: 6px 0; }
+    .route-img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--border); }
+
+    /* ── NOTES LIST ─────────────────── */
+    ul.notes { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    ul.notes li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 16px; background: #FFF8F0; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 13px; line-height: 1.6; }
+    .ic { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── INFO GRID ──────────────────── */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; }
+    .info-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; }
+    .info-label { font-size: 10px; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 5px; }
+    .info-val { font-size: 15px; font-weight: 700; line-height: 1.5; }
+    .info-val.big { font-size: 20px; }
+
+    /* ── CREW GRID ──────────────────── */
+    .crew-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; }
+    .crew-dept { background: var(--off-white); border: 1px solid var(--border); border-radius: 8px; padding: 16px 16px; }
+    .crew-dept-name { font-size: 10px; letter-spacing: .25em; text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .crew-row2 { display: flex; gap: 8px; margin-bottom: 7px; align-items: baseline; }
+    .crew-role2 { font-size: 10px; color: var(--muted); white-space: nowrap; min-width: 52px; }
+    .crew-name2 { font-size: 13px; font-weight: 700; }
+
+    /* ── CAST CARDS ─────────────────── */
+    .cast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 12px; }
+    .cast-card { background: var(--dark2); color: var(--cream); border-radius: 8px; padding: 18px 14px; text-align: center; }
+    .cast-role { font-size: 18px; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+    .cast-actor { font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.6; }
+    .cast-scenes { margin-top: 10px; font-size: 10px; color: rgba(255,255,255,.3); }
+    .cast-badge { display: inline-block; font-size: 9px; letter-spacing: .12em; background: rgba(212,150,12,.2); color: var(--gold); border: 1px solid rgba(212,150,12,.35); padding: 2px 8px; border-radius: 20px; font-weight: 700; margin-bottom: 6px; }
+
+    /* ── TIMELINE ───────────────────── */
+    .timeline { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .tl-day { border-right: 1px solid var(--border); padding: 20px 16px; }
+    .tl-day:last-child { border-right: none; }
+    .tl-num { font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .tl-label { font-size: 9px; letter-spacing: .2em; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+    .tl-date { font-size: 12px; color: var(--amber); font-weight: 700; margin-bottom: 3px; }
+    .tl-loc { font-size: 13px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    .tl-scenes { font-size: 11px; color: var(--muted); line-height: 2; }
+    .tl-day.wrap-tl { background: var(--dark2); color: var(--cream); }
+    .tl-day.wrap-tl .tl-num { color: var(--red); }
+    .tl-day.wrap-tl .tl-loc { color: var(--amber-lt); }
+    .tl-day.wrap-tl .tl-scenes { color: rgba(255,255,255,.35); }
+    .wrap-badge { display: inline-block; font-size: 9px; background: var(--red); color: #fff; letter-spacing: .12em; padding: 2px 8px; border-radius: 20px; font-weight: 700; margin-bottom: 6px; }
+    @media (max-width: 800px) { .timeline { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .timeline { grid-template-columns: 1fr; } }
+
+    /* ── HERO COVER ─────────────────── */
+    #hero {
+      min-height: 100vh; background: var(--dark);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 60px 20px; text-align: center; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,150,12,.05) 40px, rgba(212,150,12,.05) 42px);
+      pointer-events: none;
+    }
+    .hero-film { display: flex; gap: 10px; justify-content: center; }
+    .fh { width: 12px; height: 12px; border-radius: 2px; background: var(--gold); opacity: .6; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: .35em; color: var(--amber-lt); font-weight: 700; text-transform: uppercase; margin: 28px 0 16px; }
+    .hero-title { font-size: clamp(3.5rem,12vw,8rem); font-weight: 900; color: var(--cream); line-height: .9; letter-spacing: -.02em; }
+    .hero-title em { display: block; font-style: normal; font-size: clamp(.9rem,2.5vw,1.4rem); font-weight: 400; color: var(--gold); letter-spacing: .5em; margin-top: 14px; }
+    .hero-bar { width: 60px; height: 3px; background: var(--gold); margin: 28px auto; }
+    .hero-meta { font-size: .9rem; color: rgba(255,255,255,.5); letter-spacing: .08em; line-height: 2.2; }
+    .hero-meta strong { color: var(--cream); }
+    .scroll-hint { margin-top: 48px; opacity: .4; font-size: 11px; letter-spacing: .2em; color: var(--muted); }
+
+    /* ── WRAP BANNER ────────────────── */
+    .wrap-banner { background: linear-gradient(135deg,#2A0600,#1A0400); padding: 60px 20px; text-align: center; color: var(--cream); }
+    .wb-title { font-size: clamp(2rem,6vw,4rem); font-weight: 900; letter-spacing: .12em; }
+    .wb-sub { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,.45); letter-spacing: .1em; }
+
+    /* ── FOOTER ─────────────────────── */
+    footer.footer { background: var(--dark); padding: 32px 20px; text-align: center; color: rgba(255,255,255,.35); font-size: 12px; letter-spacing: .1em; line-height: 2; }
+    footer.footer strong { color: var(--gold); }
+
+    /* ── PRINT ──────────────────────── */
+    @media print {
+      @page { size: A4 portrait; margin: 15mm 12mm; }
+      #topnav { display: none; }
+      /* 每個大區塊從新頁開始 */
+      #overview, #crew, #cast, #timeline,
+      #day1, #day2, #day3, #day4, #day5 {
+        break-before: page;
+        page-break-before: always;
+      }
+      /* hero 不強制分頁（第一頁） */
+      #hero { break-before: avoid; }
+      /* 避免表格橫跨頁面被切斷 */
+      tr { break-inside: avoid; page-break-inside: avoid; }
+      /* 成本 section 內的圖片格也不要被切 */
+      .cg2 > * { break-inside: avoid; }
+      /* DAY 內部各小節不再強制分頁，讓內容自然流排 */
+      .chapter { break-before: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── STICKY NAV ─────────────────── -->
+<nav id="topnav">
+  <div class="nav-inner">
+    <div class="nav-brand">🚛 貨車男孩</div>
+    <a class="nav-link" href="#overview">概要</a>
+    <a class="nav-link" href="#crew">團隊</a>
+    <a class="nav-link" href="#cast">演員</a>
+    <a class="nav-link" href="#timeline">總覽</a>
+    <a class="nav-link day-link" href="#day1">DAY 1</a>
+    <a class="nav-link day-link" href="#day2">DAY 2</a>
+    <a class="nav-link day-link" href="#day3">DAY 3</a>
+    <a class="nav-link day-link" href="#day4">DAY 4</a>
+    <a class="nav-link wrap-link" href="#day5">DAY 5 殺青</a>
+  </div>
+</nav>
+
+<!-- ─── NAV DOTS ──────────────────── -->
+<nav id="nav-dots">
+  <a href="#hero"     title="封面"     class="active"></a>
+  <a href="#overview" title="製作概要"></a>
+  <a href="#crew"     title="主創團隊"></a>
+  <a href="#cast"     title="演員陣容"></a>
+  <a href="#timeline" title="拍攝總覽"></a>
+  <a href="#day1"     title="DAY 1"></a>
+  <a href="#day2"     title="DAY 2"></a>
+  <a href="#day3"     title="DAY 3"></a>
+  <a href="#day4"     title="DAY 4"></a>
+  <a href="#day5"     title="DAY 5 殺青"></a>
+</nav>
+
+<!-- ─── HERO COVER ─────────────────── -->
+<section id="hero" class="slide">
+  <div class="hero-film">
+    <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
+    <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
+  </div>
+  <p class="hero-eyebrow">國立臺灣藝術大學 · 電影系碩士班 · 2025 短片製作</p>
+  <h1 class="hero-title">貨車男孩<em>TRUCK BOY</em></h1>
+  <div class="hero-bar"></div>
+  <p class="hero-meta">
+    導演　<strong>林沫呈</strong><br>
+    拍攝期間　<strong>2026.05.13（三）— 05.18（一）</strong><br>
+    五天五地・18 場次・公視學生劇展
+  </p>
+  <div class="hero-film" style="margin-top:36px;">
+    <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
+    <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
+  </div>
+  <p class="scroll-hint">▼ &nbsp;向下捲動</p>
+</section>
+
+<!-- ─── 製作概要 ─────────────────────── -->
+<section id="overview" class="slide sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 製作概要</h2></div>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-label">作品名稱</div><div class="info-val big">貨車男孩 <span style="font-size:13px;font-weight:400;color:var(--muted);">TRUCK BOY</span></div></div>
+      <div class="info-card"><div class="info-label">製作類型</div><div class="info-val">短片</div></div>
+      <div class="info-card"><div class="info-label">製作單位</div><div class="info-val">國立臺灣藝術大學<br>電影系碩士班</div></div>
+      <div class="info-card"><div class="info-label">製作屬性</div><div class="info-val">公視學生劇展</div></div>
+      <div class="info-card"><div class="info-label">導演</div><div class="info-val big">林沫呈</div></div>
+      <div class="info-card"><div class="info-label">製片</div><div class="info-val big">汪家宏</div></div>
+      <div class="info-card"><div class="info-label">拍攝日期</div><div class="info-val">2026.05.13（三）—&nbsp;05.18（一）</div></div>
+      <div class="info-card"><div class="info-label">拍攝天數</div><div class="info-val big">5 天</div></div>
+      <div class="info-card"><div class="info-label">場次總計</div><div class="info-val big">S 1 — S 18　共 18 場次</div></div>
+      <div class="info-card"><div class="info-label">主要拍攝地點</div><div class="info-val">板橋・新北　／　宜蘭外景<br>五股工業區　／　五股黑棚（廣晟影業）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 主創團隊 ─────────────────────── -->
+<section id="crew" class="slide sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👥 主創團隊</h2></div>
+    <div class="crew-grid">
+      <div class="crew-dept">
+        <div class="crew-dept-name">導演組</div>
+        <div class="crew-row2"><span class="crew-role2">導演</span><span class="crew-name2">林沫呈</span></div>
+        <div class="crew-row2"><span class="crew-role2">副導</span><span class="crew-name2">張不乙</span></div>
+        <div class="crew-row2"><span class="crew-role2">場記</span><span class="crew-name2">黃詩婷</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">製片組</div>
+        <div class="crew-row2"><span class="crew-role2">製片</span><span class="crew-name2">汪家宏</span></div>
+        <div class="crew-row2"><span class="crew-role2">現場製片</span><span class="crew-name2">郭子豪 Jeff</span></div>
+        <div class="crew-row2"><span class="crew-role2">機動製片</span><span class="crew-name2">劉岳銘 小明</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">攝影組</div>
+        <div class="crew-row2"><span class="crew-role2">攝影</span><span class="crew-name2">歐峻名 香蕉</span></div>
+        <div class="crew-row2"><span class="crew-role2">攝大助</span><span class="crew-name2">謝東霖 東東</span></div>
+        <div class="crew-row2"><span class="crew-role2">攝助</span><span class="crew-name2">陳守聰 Alex</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">燈光組</div>
+        <div class="crew-row2"><span class="crew-role2">燈光</span><span class="crew-name2">林暐軒</span></div>
+        <div class="crew-row2"><span class="crew-role2">燈助</span><span class="crew-name2">鍾沁朋</span></div>
+        <div class="crew-row2"><span class="crew-role2">燈助</span><span class="crew-name2">楊晨光 纖維</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">美術組</div>
+        <div class="crew-row2"><span class="crew-role2">美術指導</span><span class="crew-name2">曾玟琦 朵拉</span></div>
+        <div class="crew-row2"><span class="crew-role2">美術助理</span><span class="crew-name2">張庭瑋</span></div>
+        <div class="crew-row2"><span class="crew-role2">美術助理</span><span class="crew-name2">許之卉</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">造型・化妝</div>
+        <div class="crew-row2"><span class="crew-role2">造型</span><span class="crew-name2">王韻茹 松鼠</span></div>
+        <div class="crew-row2"><span class="crew-role2">化妝師</span><span class="crew-name2">郭姸希 妍希</span></div>
+        <div class="crew-row2"><span class="crew-role2">化妝助理</span><span class="crew-name2">莊於潔 小莊</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">收音</div>
+        <div class="crew-row2"><span class="crew-role2">收音</span><span class="crew-name2">梁惠宣</span></div>
+        <div class="crew-row2"><span class="crew-role2">收音助理</span><span class="crew-name2">范維珍</span></div>
+      </div>
+      <div class="crew-dept">
+        <div class="crew-dept-name">其他</div>
+        <div class="crew-row2"><span class="crew-role2">劇照</span><span class="crew-name2">陳千華 Mika</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 演員陣容 ─────────────────────── -->
+<section id="cast" class="slide sp sp-pad" style="background:var(--dark2);">
+  <div class="wrap">
+    <div class="sh" style="border-bottom-color:var(--gold);"><h2 style="color:var(--cream);">🎭 演員陣容</h2></div>
+    <div class="cast-grid">
+      <div class="cast-card">
+        <div class="cast-badge">主角</div>
+        <div class="cast-role">阿肥</div>
+        <div class="cast-actor">陳昱安<br><span style="opacity:.45;font-size:11px;">蛋寶</span></div>
+        <div class="cast-scenes">D1・D2・D3・D4・D5<br>S2 S3 S4 S5 S6 S9 S14B S16</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-badge">主角</div>
+        <div class="cast-role">和民</div>
+        <div class="cast-actor">林沫呈<br><span style="opacity:.45;font-size:11px;">導演兼演</span></div>
+        <div class="cast-scenes">D1・D2・D3・D4・D5<br>S2 S3 S4 S5 S6–S8 S9B S13–S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">美玉</div>
+        <div class="cast-actor">陳映如<br><span style="opacity:.45;font-size:11px;">小蘋果</span></div>
+        <div class="cast-scenes">DAY 2・DAY 5<br>S10 · S16 · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">淑芬</div>
+        <div class="cast-actor">楊瑩瑩</div>
+        <div class="cast-scenes">DAY 4・DAY 5<br>S6A · S6B · S7 · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">警察</div>
+        <div class="cast-actor">王為</div>
+        <div class="cast-scenes">DAY 3・DAY 5<br>S14A · S14C · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">西施</div>
+        <div class="cast-actor">Miya</div>
+        <div class="cast-scenes">DAY 5<br>S9A · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">西施</div>
+        <div class="cast-actor">何子田</div>
+        <div class="cast-scenes">DAY 5<br>S9A · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">西施</div>
+        <div class="cast-actor">吳思竺</div>
+        <div class="cast-scenes">DAY 5<br>S9A · S14B</div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-role">秀娥</div>
+        <div class="cast-actor">（媽媽）<br><span style="opacity:.45;font-size:11px;">聲演</span></div>
+        <div class="cast-scenes">DAY 1<br>S3 · S4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 拍攝總覽 ─────────────────────── -->
+<section id="timeline" class="slide sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🗓 拍攝行程總覽</h2></div>
+    <div class="timeline">
+      <div class="tl-day">
+        <div class="tl-num">01</div>
+        <div class="tl-label">Day One</div>
+        <div class="tl-date">05/13（三）</div>
+        <div class="tl-loc">📍 板橋・新北</div>
+        <div class="tl-scenes">S2 阿肥房間<br>S3 阿肥家廁所<br>S4 阿肥家客廳<br>S5A 貨車・巷子<br>S5B 新北大科路</div>
+      </div>
+      <div class="tl-day">
+        <div class="tl-num">02</div>
+        <div class="tl-label">Day Two</div>
+        <div class="tl-date">05/14（四）</div>
+        <div class="tl-loc">📍 宜蘭外景</div>
+        <div class="tl-scenes">S10 美玉檳榔攤<br>S11 貨車・興農路<br>S12A 興農路附近<br>S12D 窖寮路橋下<br>S12E 橋板湖路段<br>S13 窖寮→橋板湖<br>S18 河堤</div>
+      </div>
+      <div class="tl-day">
+        <div class="tl-num">03</div>
+        <div class="tl-label">Day Three</div>
+        <div class="tl-date">05/15（五）</div>
+        <div class="tl-loc">📍 宜蘭外景</div>
+        <div class="tl-scenes">S12B 橋下小溪邊<br>S12C 小溪橋旁<br>S14A 地磅站<br>S14C 地磅站<br>S15 鄉間碎石路<br>S17 貨車・隧道</div>
+      </div>
+      <div class="tl-day">
+        <div class="tl-num">04</div>
+        <div class="tl-label">Day Four</div>
+        <div class="tl-date">05/16（六）</div>
+        <div class="tl-loc">📍 五股工業區</div>
+        <div class="tl-scenes">S6A 工廠卸貨區<br>S6B 工廠卸貨區<br>S7 工廠後車板<br>S8 工廠貨車上</div>
+      </div>
+      <div class="tl-day wrap-tl">
+        <span class="wrap-badge">🎬 殺青</span>
+        <div class="tl-num">05</div>
+        <div class="tl-label">Day Five</div>
+        <div class="tl-date">05/18（一）</div>
+        <div class="tl-loc">📍 五股黑棚<br>廣晟影業</div>
+        <div class="tl-scenes">S1 節目夢境<br>S9B 西施幻想<br>S16 夢想幻想<br>S14B 懇求幻想<br>S9A 西施幻想</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     DAY 1
+════════════════════════════════════════ -->
+<div id="day1" class="slide">
+<div class="chapter">
+  <div class="chapter-daynum">01</div>
+  <div class="chapter-inner">
+    <div class="chapter-label">Day One · 2026.05.13（三）</div>
+    <h2 class="chapter-title">板橋・新北</h2>
+    <p class="chapter-sub">臺藝大家景　／　外景車拍</p>
+    <div class="chapter-meta">
+      <span class="chapter-tag">🎬 S2 · S3 · S4 · S5A · S5B</span>
+      <span class="chapter-tag">👥 阿肥・和民</span>
+      <span class="chapter-tag">07:30 集合</span>
+      <span class="chapter-tag">17:00 收工</span>
+      <span class="chapter-tag"><a href="https://maps.app.goo.gl/Zc2CGGtw9hVN56hJ9" target="_blank" style="color:inherit;text-decoration:none;">🗺 Google Maps</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- 集合乘車 D1 -->
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🚗 集合・乘車資訊</h2></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">📍 集合地點：國立臺灣藝術大學 造形學院前　<strong style="color:var(--text);">07:30 集合・08:00 發車</strong></p>
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead><tr><th>車輛</th><th>車牌</th><th>駕駛</th><th>可載人數</th><th>乘客</th></tr></thead>
+        <tbody>
+          <tr><td>9人巴士</td><td class="car-id">—</td><td>郭子豪</td><td>8</td><td>蛋寶・小莊・妍希・千華・小蘋果</td></tr>
+          <tr><td>製片車</td><td class="car-id">CDK-0035</td><td>汪家宏</td><td>5</td><td>松鼠・造型助理</td></tr>
+          <tr><td>導演車</td><td class="car-id">AWG-2750</td><td>張不乙</td><td>3</td><td>—</td></tr>
+          <tr><td>美術車</td><td class="car-id">AKG-0190</td><td>朵拉</td><td>3</td><td>—</td></tr>
+          <tr><td>燈光車</td><td class="car-id car-pending">待確認</td><td class="car-pending">待確認</td><td>—</td><td>—</td></tr>
+          <tr><td>攝影車</td><td class="car-id">AQH-1607</td><td>歐峻名</td><td>5</td><td>—</td></tr>
+          <tr><td>貨車</td><td class="car-id">6T-9623</td><td>林沫呈</td><td>2</td><td>小明</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh" style="margin-top:32px;"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-wrap">
+      <table class="weather-table">
+        <thead><tr><th>日期</th><th>地點</th><th>天氣狀況</th><th>降雨機率</th></tr></thead>
+        <tbody>
+          <tr><td>05/12（二）</td><td>板橋</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr class="w-today"><td><strong>05/13（三）★</strong></td><td>板橋</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr><td>05/14（四）</td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr><td>05/15（五）</td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr><td>05/16（六）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr><td>05/18（一）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh" style="margin-top:32px;"><h2>🗺 卸貨路線圖</h2></div>
+    <img class="route-img" src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDJ2n3Goom_Ces98aTL3oBK562gdgOAAIaG2sb-Ra5V_j9528mQexMAQADAgADdwADOwQ.jpg" alt="卸貨路線圖">
+  </div>
+</section>
+
+<!-- 拍攝行程 D1 -->
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead><tr><th>時間</th><th>類型</th><th>場次</th><th>地點</th><th>時段／景</th><th>戲時</th><th>頁／顆</th><th>劇情摘要</th><th>演員</th></tr></thead>
+        <tbody>
+          <tr class="r-prep"><td class="t-time">07:30–08:45</td><td><span class="sb sb-prep">準備</span></td><td colspan="7">🎬 早餐・開鏡儀式 15min・技術 Setting・演員妝髮服 35min（阿肥、和民）</td></tr>
+          <tr class="r-shoot"><td class="t-time">08:45–10:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 2</td><td class="t-loc">阿肥房間</td><td><span class="tag t-dawn">清晨</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">5:32</td><td class="t-pg">0.6p&nbsp;/&nbsp;7顆</td><td class="t-desc">和民喚醒阿肥，慫恿阿肥一起出門</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">服裝</span>【肥2】睡衣裝・【民1】吊嘎裝 <span class="pn-tag">陳設</span>窗簾・寢具組・電風扇（綁紅繩）・收音機・畫筆用具・海報・阿肥的畫 <span class="pn-tag">道具</span>隨身聽・音源線 <span class="pn-tag">燈光</span>煙機 <span class="pn-tag">收音</span>同步錄音 <span class="pn-tag">備註</span>清晨光感</div></td></tr>
+          <tr class="r-prep"><td class="t-time">10:30–11:00</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🔄 轉景技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">11:00–12:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 3</td><td class="t-loc">阿肥家廁所</td><td><span class="tag t-dawn">清晨</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">5:35</td><td class="t-pg">0.7p&nbsp;/&nbsp;5顆</td><td class="t-desc">和民大便，阿肥刷牙，媽媽叮囑阿肥要練舞，父子默契地密謀</td><td class="t-cast">阿肥<br>和民<br><span style="color:var(--blue);font-size:11px">秀娥 聲演</span></td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">服裝</span>【肥2】睡衣裝・【民1】吊嘎裝 <span class="pn-tag">陳設</span>浴簾・2組牙刷／漱口杯・衛生紙・毛巾 <span class="pn-tag">道具</span>隨身聽・音源線・阿肥牙刷／漱口杯 <span class="pn-tag">特道</span>牙膏（不刺激）<span class="pn-tag">攝影</span>Zoom 鏡頭 <span class="pn-tag">收音</span>同步錄音・單收：大便落水、廚房抽油煙機</div></td></tr>
+          <tr class="r-prep"><td class="t-time">12:30–13:30</td><td><span class="sb sb-lunch">午餐</span></td><td colspan="7">🍱 午餐・轉景 Setting・演員換裝 15min（阿肥、和民）&emsp;<span style="color:var(--amber)">⚡ 13:30 貨車到場，美術組陳設貨車後斗 30min</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">13:30–14:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 4</td><td class="t-loc">阿肥家客廳</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">5:53</td><td class="t-pg">0.5p&nbsp;/&nbsp;1顆</td><td class="t-desc">阿肥、和民偷跑出門，躲過媽媽的視線</td><td class="t-cast">阿肥<br>和民<br><span style="color:var(--blue);font-size:11px">秀娥 聲演</span></td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>綠花布・蕾絲窗簾・年曆・花瓶・桌巾・抱枕・水果盤・綠電風扇 <span class="pn-tag">道具</span>隨身聽・音源線・和民手機 <span class="pn-tag">場務</span>滑軌 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">14:00–14:30</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🔄 轉景技術 Setting・美術組場復家景</td></tr>
+          <tr class="r-shoot"><td class="t-time">14:30–15:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 5A</td><td class="t-loc">貨車上（家外巷子）</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">5:58</td><td class="t-pg">0.2p&nbsp;/&nbsp;2顆</td><td class="t-desc">阿肥、和民坐上車後鬆一口氣，發動引擎</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗空 <span class="pn-tag">道具</span>1500ml 礦泉水・600ml 礦泉水・手套・隨身聽・音源線・和民手機 <span class="pn-tag">收音</span>同步錄音・單收：引擎發動</div></td></tr>
+          <tr class="r-prep"><td class="t-time">15:00–15:40</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🚗 轉景：大科路・技術 Setting（工作站）・美術組場復家景&emsp;<span style="color:var(--amber);">🍎 <strong>小蘋果 15:00</strong> 台藝集合・準備發車</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">15:40–17:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 5B</td><td class="t-loc">貨車上（新北大科路）</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">6:10</td><td class="t-pg">0.2p&nbsp;/&nbsp;6顆</td><td class="t-desc">貨車開上路，父子聽著《打拼人》搖擺</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗空 <span class="pn-tag">道具</span>1500ml 礦泉水・600ml 礦泉水・手套・隨身聽・音源線・和民手機 <span class="pn-tag">場務</span>車拍用機車 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-wrap"><td class="t-time">17:00 收工</td><td><span class="sb sb-wrap">收工</span></td><td colspan="7">🎬 大隊移動 → <strong>宜蘭山杉青旅</strong> 住宿・貨車回臺藝家景，美術組陳設貨車後斗滿車狀態<br><span style="font-size:12px;color:#E87060;">⚠️ 美術撤場時間請預留 — 預設 15:30 結束</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 演員 D1 -->
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🎭 今日出席演員</h2></div>
+    <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px;">
+      <table class="ct">
+        <thead><tr><th>角色</th><th>演員</th><th>出席場次</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿肥</strong></td><td>陳昱安（蛋寶）</td><td><span class="on">S2 · S3 · S4 · S5A · S5B</span></td><td>—</td></tr>
+          <tr><td><strong>和民</strong></td><td>林沫呈</td><td><span class="on">S2 · S3 · S4 · S5A · S5B</span></td><td>—</td></tr>
+          <tr><td><strong>秀娥</strong></td><td>—</td><td><span class="vo">聲演</span></td><td>S3、S4 媽媽聲音</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 定裝照 D1 -->
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-section">
+      <div class="costume-title">阿肥 — 陳昱安（蛋寶）</div>
+      <div class="cg2">
+        <div class="si-card">
+          <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDS2n60sW0IcyK9oJ7mzS7wQGOHfl5AALoDmsbHtLYVy7Q1aizeBC4AQADAgADdwADOwQ.png" alt="阿肥睡衣裝">
+          <div class="si-label"><div class="sn">S 2 · S 3</div><div class="st">【肥2】睡衣裝</div><div class="sd">阿肥房間・家廁所</div></div>
+        </div>
+        <div class="si-card">
+          <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTGn60_E_PrBGqVipuQ8er4sBpsCBAALwDmsbHtLYV3l59ZZ0Nhf7AQADAgADdwADOwQ.png" alt="阿肥一般裝">
+          <div class="si-label"><div class="sn">S 4 · S 5A · S 5B</div><div class="st">【肥3】一般裝</div><div class="sd">客廳・貨車上</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">和民 — 林沫呈</div>
+      <div style="max-width:320px;">
+        <div class="si-card">
+          <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTWn61F_hecaiWMhYHZA4elbYzwFwAALxDmsbHtLYV_xtcejQtW4LAQADAgADdwADOwQ.png" alt="和民服裝">
+          <div class="si-label"><div class="sn">S 2 · S 3 · S 4 · S 5A · S 5B</div><div class="st">【民1・民2】全日同一套</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 住宿 D1 -->
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🏨 山杉青旅 住宿配置</h2></div>
+    <div class="room-meta">
+      <span>📅 05/13 入住</span>
+      <span>👥 22 人</span>
+      <span>📍 宜蘭縣礁溪鄉十六結路103之37號</span>
+      <a href="https://maps.app.goo.gl/S3R8wEVY1or43yiV8" target="_blank">🗺 Google Maps</a>
+      <a href="tel:0968765083" style="color:var(--amber-lt);">📞 0968-765-083</a>
+    </div>
+    <p style="font-size:12px; color:var(--red); font-weight:700; margin-bottom:16px;">⚠️ 山杉青旅不提供毛巾及牙刷牙膏，請自行攜帶。</p>
+    <div class="room-grid">
+      <div class="room-card"><div class="room-head"><span class="room-name">A 房</span><span class="room-tag f">女 6人</span></div><div class="room-body"><div class="room-person"><span>千華</span><span>黃詩婷</span><span>妍希</span><span>小莊</span><span>松鼠</span><span class="empty">—</span></div></div></div>
+      <div class="room-card"><div class="room-head"><span class="room-name">B 房</span><span class="room-tag m">男 6人</span></div><div class="room-body"><div class="room-person"><span>游易軒</span><span>暐軒</span><span>纖維</span><span>小葉</span><span>香蕉</span><span>東東</span></div></div></div>
+      <div class="room-card"><div class="room-head"><span class="room-name">C 房</span><span class="room-tag m">男 3人</span></div><div class="room-body"><div class="room-person"><span>蛋寶</span><span>小明</span><span>Alex</span></div></div></div>
+      <div class="room-card"><div class="room-head"><span class="room-name">D 房</span><span class="room-tag m">男 3人</span></div><div class="room-body"><div class="room-person"><span>汪家宏</span><span>Jeff</span><span>張不乙</span></div></div></div>
+      <div class="room-card"><div class="room-head"><span class="room-name">E 房</span><span class="room-tag f">女 3人</span></div><div class="room-body"><div class="room-person"><span>范維珍</span><span>梁惠宣</span><span>小蘋果</span></div></div></div>
+      <div class="room-card"><div class="room-head"><span class="room-name">F 房</span><span class="room-tag s">自求多福</span></div><div class="room-body"><div class="room-person"><span>林沫呈</span></div></div></div>
+    </div>
+  </div>
+</section>
+</div><!-- /day1 -->
+
+<!-- ════════════════════════════════════════
+     DAY 2
+════════════════════════════════════════ -->
+<div id="day2" class="slide">
+<div class="chapter">
+  <div class="chapter-daynum">02</div>
+  <div class="chapter-inner">
+    <div class="chapter-label">Day Two · 2026.05.14（四）</div>
+    <h2 class="chapter-title">宜蘭外景</h2>
+    <p class="chapter-sub">濱海・美玉檳榔攤・田間・市區</p>
+    <div class="chapter-meta">
+      <span class="chapter-tag">🎬 S10 · S11 · S12A · S12D · S12E · S13 · S18</span>
+      <span class="chapter-tag">👥 阿肥・和民・美玉</span>
+      <span class="chapter-tag">08:30 集合</span>
+      <span class="chapter-tag">20:30 收工</span>
+    </div>
+  </div>
+</div>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🚗 乘車資訊</h2></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">📍 集合地點：宜蘭山杉青旅　<strong style="color:var(--text);">07:30 集合・08:00 發車</strong></p>
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead><tr><th>車輛</th><th>車牌</th><th>駕駛</th><th>可載人數</th><th>乘客</th></tr></thead>
+        <tbody>
+          <tr><td>9人巴士</td><td class="car-id">—</td><td>郭子豪</td><td>8</td><td>蛋寶・小莊・妍希・千華・王為</td></tr>
+          <tr><td>製片車</td><td class="car-id">CDK-0035</td><td>汪家宏</td><td>5</td><td>松鼠・造型助理</td></tr>
+          <tr><td>導演車</td><td class="car-id">AWG-2750</td><td>張不乙</td><td>3</td><td>—</td></tr>
+          <tr><td>美術車</td><td class="car-id">AKG-0190</td><td>朵拉</td><td>3</td><td>—</td></tr>
+          <tr><td>燈光車</td><td class="car-id car-pending">待確認</td><td class="car-pending">待確認</td><td>—</td><td>—</td></tr>
+          <tr><td>攝影車</td><td class="car-id">AQH-1607</td><td>歐峻名</td><td>5</td><td>—</td></tr>
+          <tr><td>貨車</td><td class="car-id">6T-9623</td><td>林沫呈</td><td>2</td><td>小明</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh" style="margin-top:32px;"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-wrap">
+      <table class="weather-table">
+        <thead><tr><th>日期</th><th>地點</th><th>天氣狀況</th><th>降雨機率</th></tr></thead>
+        <tbody>
+          <tr><td>05/13（三）</td><td>板橋</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr class="w-today"><td><strong>05/14（四）★</strong></td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr><td>05/15（五）</td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr><td>05/16（六）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr><td>05/18（一）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead><tr><th>時間</th><th>類型</th><th>場次</th><th>地點</th><th>時段／景</th><th>戲時</th><th>頁／顆</th><th>劇情摘要</th><th>演員</th></tr></thead>
+        <tbody>
+          <tr class="r-prep"><td class="t-time">08:30–09:00</td><td><span class="sb sb-prep">準備</span></td><td colspan="7">🏨【07:30 民宿】演員妝髮服 35min（阿肥、和民）・早餐・技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">09:00–09:10</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 12D</td><td class="t-loc">窖寮路橋下<br><small style="color:var(--muted)">(蒙太奇)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">9:50</td><td class="t-pg">0.1p&nbsp;/&nbsp;1顆</td><td class="t-desc">貨車從路橋下開過</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗滿 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">09:10–09:40</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🚗 車拍技術 Setting&emsp;<span style="color:var(--amber)">⚡ 美術組 10:00 進場陳設檳榔攤 60min</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">09:40–11:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 13</td><td class="t-loc">貨車上<br><small style="color:var(--muted)">(窖寮→橋板湖)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">10:40</td><td class="t-pg">1.5p&nbsp;/&nbsp;3顆</td><td class="t-desc">阿肥畫好大海，和民稱讚阿肥，兩人開心聽著《放手追夢》跳舞，直到和民看見警察</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗滿 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">播歌</span>排練播放《放手追夢》（製片音響）<span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">11:00–11:20</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🔄 轉景技術 Setting&emsp;<span style="color:var(--muted);font-size:12px;">🏨【12:00 民宿】演員妝髮服 85min（美玉）</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">11:20–12:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 12E</td><td class="t-loc">橋板湖南下路段<br><small style="color:var(--muted)">(蒙太奇)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">10:20</td><td class="t-pg">0.1p&nbsp;/&nbsp;5顆</td><td class="t-desc">貨車經過海邊，和民叫醒阿肥，阿肥趕快拿蠟筆畫下大海景色</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗滿 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">12:30–14:00</td><td><span class="sb sb-lunch">午餐</span></td><td colspan="7">🍱 午餐・轉景技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">14:00–15:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 10</td><td class="t-loc">美玉檳榔攤</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">8:30</td><td class="t-pg">1.6p&nbsp;/&nbsp;9顆</td><td class="t-desc">阿肥被美玉喚醒，和民送貨給美玉，美玉送一盒禮物給阿肥</td><td class="t-cast">阿肥<br>和民<br>美玉</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>招牌・亮片拼貼・燈管・美玉海報・車內陳設組・後斗滿 <span class="pn-tag">道具</span>1500ml 結冰水・600ml 結冰水・手套・隨身聽・音源線・和民手機・車內油桶・禮物袋・鈔票 <span class="pn-tag">收音</span>同步錄音・單收：冰箱開／關門</div></td></tr>
+          <tr class="r-prep"><td class="t-time">15:30–15:50</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🔄 轉景技術 Setting・美術組場復檳榔攤&emsp;<span style="color:var(--red);font-weight:700;">⚠️ 小蘋果 15:30 收工，製片組送至火車站</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">15:50–17:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 11</td><td class="t-loc">貨車上（興農路）</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">8:35</td><td class="t-pg">0.4p&nbsp;/&nbsp;4顆</td><td class="t-desc">阿肥拿出美玉送的蠟筆，和民抽出紙箱碎片給阿肥畫圖</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・禮物袋・蠟筆盒・紙箱碎片 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-shoot"><td class="t-time">17:00–17:10</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 12A</td><td class="t-loc">興農路附近<br><small style="color:var(--muted)">(蒙太奇)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">8:45</td><td class="t-pg">0.1p&nbsp;/&nbsp;1顆</td><td class="t-desc">阿肥在車內畫圖，和民做鬼臉逗阿肥</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">17:10–18:30</td><td><span class="sb sb-lunch">晚餐</span></td><td colspan="7">🍜 晚餐・轉景技術 Setting・美術組陳設貨車後斗 30min<br><span style="font-size:12px;color:var(--muted);">📍 七張社區服務中心（河堤休憩點）・可停車 / 廁所・<a href="tel:039303996" style="color:var(--amber);text-decoration:none;">03-9303996</a></span></td></tr>
+          <tr class="r-shoot"><td class="t-time">18:30–20:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 18</td><td class="t-loc">河堤</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">19:00</td><td class="t-pg">1.5p&nbsp;/&nbsp;7顆</td><td class="t-desc">和民給阿肥驚喜，阿肥看見貨車上貼滿了畫，兩人各帶一邊耳機聽《放手追夢》，一起跳舞</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗 20 張阿肥的畫 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">播歌</span>排練播放《放手追夢》（製片音響）<span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-wrap"><td class="t-time">20:30 收工</td><td><span class="sb sb-wrap">收工</span></td><td colspan="7">Day 2 收工・返回山杉青旅休息</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🎭 今日出席演員</h2></div>
+    <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px;">
+      <table class="ct">
+        <thead><tr><th>角色</th><th>演員</th><th>出席場次</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿肥</strong></td><td>陳昱安（蛋寶）</td><td><span class="on">全日</span></td><td>—</td></tr>
+          <tr><td><strong>和民</strong></td><td>林沫呈</td><td><span class="on">全日</span></td><td>—</td></tr>
+          <tr><td><strong>美玉</strong></td><td>陳映如（小蘋果）</td><td><span class="on">S 10</span></td><td>15:30 收工，製片組送至火車站</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-section">
+      <div class="costume-title">阿肥 · 和民</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTGn60_E_PrBGqVipuQ8er4sBpsCBAALwDmsbHtLYV3l59ZZ0Nhf7AQADAgADdwADOwQ.png" alt="阿肥一般裝"><div class="si-label"><div class="sn">陳昱安（蛋寶）· 全日同一套</div><div class="st">【肥3】一般裝</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTWn61F_hecaiWMhYHZA4elbYzwFwAALxDmsbHtLYV_xtcejQtW4LAQADAgADdwADOwQ.png" alt="和民服裝"><div class="si-label"><div class="sn">林沫呈 · 全日同一套</div><div class="st">【民2】</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">美玉 — 陳映如（小蘋果）</div>
+      <div style="max-width:320px;">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTmn62hySG0hsvkpGm-B3-pE2kW5VAAIHD2sbHtLYV5mn8fWXAAFS3gEAAwIAA3cAAzsE.png" alt="美玉定裝"><div class="si-label"><div class="sn">S 10</div><div class="st">【玉1】</div><div class="sd">美玉檳榔攤</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /day2 -->
+
+<!-- ════════════════════════════════════════
+     DAY 3
+════════════════════════════════════════ -->
+<div id="day3" class="slide">
+<div class="chapter">
+  <div class="chapter-daynum">03</div>
+  <div class="chapter-inner">
+    <div class="chapter-label">Day Three · 2026.05.15（五）</div>
+    <h2 class="chapter-title">宜蘭外景</h2>
+    <p class="chapter-sub">地磅站・橋下溪・隧道夜景</p>
+    <div class="chapter-meta">
+      <span class="chapter-tag">🎬 S12B · S12C · S14A · S14C · S15 · S17</span>
+      <span class="chapter-tag">👥 阿肥・和民・警察 王為</span>
+      <span class="chapter-tag">08:30 集合</span>
+      <span class="chapter-tag">20:30 收工・返台北</span>
+    </div>
+  </div>
+</div>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🚗 乘車資訊</h2></div>
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead><tr><th>車輛</th><th>車牌</th><th>駕駛</th><th>可載人數</th><th>乘客</th></tr></thead>
+        <tbody>
+          <tr><td>9人巴士</td><td class="car-id">—</td><td>郭子豪</td><td>8</td><td>蛋寶・小莊・妍希・千華・王為</td></tr>
+          <tr><td>製片車</td><td class="car-id">CDK-0035</td><td>汪家宏</td><td>5</td><td>松鼠・造型助理</td></tr>
+          <tr><td>導演車</td><td class="car-id">AWG-2750</td><td>張不乙</td><td>3</td><td>—</td></tr>
+          <tr><td>美術車</td><td class="car-id">AKG-0190</td><td>朵拉</td><td>3</td><td>—</td></tr>
+          <tr><td>燈光車</td><td class="car-id car-pending">待確認</td><td class="car-pending">待確認</td><td>—</td><td>—</td></tr>
+          <tr><td>攝影車</td><td class="car-id">AQH-1607</td><td>歐峻名</td><td>5</td><td>—</td></tr>
+          <tr><td>貨車</td><td class="car-id">6T-9623</td><td>林沫呈</td><td>2</td><td>小明</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sh" style="margin-top:32px;"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-wrap">
+      <table class="weather-table">
+        <thead><tr><th>日期</th><th>地點</th><th>天氣狀況</th><th>降雨機率</th></tr></thead>
+        <tbody>
+          <tr><td>05/14（四）</td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr class="w-today"><td><strong>05/15（五）★</strong></td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr><td>05/16（六）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead><tr><th>時間</th><th>類型</th><th>場次</th><th>地點</th><th>時段／景</th><th>戲時</th><th>頁／顆</th><th>劇情摘要</th><th>演員</th></tr></thead>
+        <tbody>
+          <tr class="r-prep"><td class="t-time">08:30–09:30</td><td><span class="sb sb-prep">準備</span></td><td colspan="7">【07:30 民宿】和民・警察 妝髮服 35min　【08:00 民宿】阿肥 妝髮服 35min　🍳 早餐・技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">09:30–11:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 14A</td><td class="t-loc">濱海公路地磅站</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">10:42</td><td class="t-pg">1p&nbsp;/&nbsp;7顆</td><td class="t-desc">警察攔下貨車取締，阿肥唱起歌哀求，跑到貨車後方</td><td class="t-cast">阿肥<br>和民<br>王為</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗滿・臨檢牌 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片・指揮棒・哨子・警察本・筆 <span class="pn-tag">特道</span>阿肥的畫・油桶門・後斗綠key <span class="pn-tag">攝影</span>探針頭鏡頭 <span class="pn-tag">燈光</span>反光毯 <span class="pn-tag">收音</span>同步錄音、尾段MOS <span class="pn-tag">播歌</span>尾段播放乖乖（製片音響）<span class="pn-tag">單收</span>開/關車門・阿肥跑步</div></td></tr>
+          <tr class="r-shoot"><td class="t-time">11:00–11:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 14C</td><td class="t-loc">濱海公路地磅站</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">10:44</td><td class="t-pg">0.5p&nbsp;/&nbsp;3顆</td><td class="t-desc">回到現實，警察被說服，放過阿肥、和民</td><td class="t-cast">阿肥<br>和民<br>王為</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片・指揮棒・哨子・警察本・筆 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">11:30–12:30</td><td><span class="sb sb-lunch">午餐</span></td><td colspan="7">🍱 午餐・轉景技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">12:30–13:10</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 12B</td><td class="t-loc">橋下小溪邊<br><small style="color:var(--muted)">(蒙太奇)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">9:10</td><td class="t-pg">0.1p&nbsp;/&nbsp;5顆</td><td class="t-desc">阿肥、和民在小溪邊尿尿，互相逗弄、打水漂</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機 <span class="pn-tag">特道</span>尿尿瓶・石頭（現場）<span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-shoot"><td class="t-time">13:10–13:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 12C</td><td class="t-loc">小溪橋旁道路<br><small style="color:var(--muted)">(蒙太奇)</small></td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">9:35</td><td class="t-pg">0.1p&nbsp;/&nbsp;3顆</td><td class="t-desc">阿肥在車上睡著，和民欣慰看著</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">13:30–14:00</td><td><span class="sb sb-prep">轉景</span></td><td colspan="7">🔄 轉景技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">14:00–16:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 15</td><td class="t-loc">鄉間小路・碎石路</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">10:55</td><td class="t-pg">2.3p&nbsp;/&nbsp;11顆</td><td class="t-desc">貨車爆胎，和民焦慮、阿肥卻高興不用趕回去練舞，父子爭吵後，阿肥獨自坐上車</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音 <span class="pn-tag">單收</span>輪胎駛過碎石路 <span class="pn-tag">備註</span>紀錄 match cut 鏡頭數值</div></td></tr>
+          <tr class="r-prep"><td class="t-time">16:00–17:30</td><td><span class="sb sb-lunch">晚餐</span></td><td colspan="7">🍜 轉景：蘇澳蘭陽隧道・技術 Setting・晚餐</td></tr>
+          <tr class="r-shoot"><td class="t-time">17:30–20:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 17</td><td class="t-loc">貨車上（隧道・車拍）</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-ext">外</span></td><td class="t-tc">18:30</td><td class="t-pg">1.2p&nbsp;/&nbsp;9顆</td><td class="t-desc">阿肥睡醒，和民向阿肥道歉，說要帶阿肥去一個神秘的地方</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note"><span class="pn-tag">陳設</span>車內陳設組・後斗空 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片 <span class="pn-tag">特道</span>阿肥的畫 <span class="pn-tag">收音</span>同步錄音 <span class="pn-tag">單收</span>隧道行駛環境音</div></td></tr>
+          <tr class="r-wrap"><td class="t-time">20:30 收工</td><td><span class="sb sb-wrap">收工</span></td><td colspan="7">Day 3 收工・移動回台北</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🎭 今日出席演員</h2></div>
+    <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px;">
+      <table class="ct">
+        <thead><tr><th>角色</th><th>演員</th><th>出席場次</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿肥</strong></td><td>陳昱安（蛋寶）</td><td><span class="on">全日</span></td><td>—</td></tr>
+          <tr><td><strong>和民</strong></td><td>林沫呈</td><td><span class="on">全日</span></td><td>—</td></tr>
+          <tr><td><strong>警察</strong></td><td>王為</td><td><span class="on">S14A · S14C</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-section">
+      <div class="costume-title">阿肥 · 和民</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTGn60_E_PrBGqVipuQ8er4sBpsCBAALwDmsbHtLYV3l59ZZ0Nhf7AQADAgADdwADOwQ.png" alt="阿肥一般裝"><div class="si-label"><div class="sn">陳昱安（蛋寶）· 全日同一套</div><div class="st">【肥3】一般裝</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTWn61F_hecaiWMhYHZA4elbYzwFwAALxDmsbHtLYV_xtcejQtW4LAQADAgADdwADOwQ.png" alt="和民服裝"><div class="si-label"><div class="sn">林沫呈 · 全日同一套</div><div class="st">【民2】</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">警察 — 王為</div>
+      <div style="max-width:320px;">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDT2n67fRheKys6FkSy6EQO4sxk0nUAAKHD2sbHtLYV64OsKRg63EsAQADAgADdwADOwQ.png" alt="警察定裝"><div class="si-label"><div class="sn">S 14A · S 14C</div><div class="st">【警1】警察制服</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /day3 -->
+
+<!-- ════════════════════════════════════════
+     DAY 4
+════════════════════════════════════════ -->
+<div id="day4" class="slide">
+<div class="chapter">
+  <div class="chapter-daynum">04</div>
+  <div class="chapter-inner">
+    <div class="chapter-label">Day Four · 2026.05.16（六）</div>
+    <h2 class="chapter-title">五股工業區</h2>
+    <p class="chapter-sub">沙拉油工廠・卸貨區・後車板</p>
+    <div class="chapter-meta">
+      <span class="chapter-tag">🎬 S6A · S6B · S7 · S8</span>
+      <span class="chapter-tag">👥 阿肥・和民・淑芬</span>
+      <span class="chapter-tag">08:30 集合</span>
+      <span class="chapter-tag">18:00 收工</span>
+      <span class="chapter-tag"><a href="https://maps.app.goo.gl/JLRSVsa6JxcZykra6" target="_blank" style="color:inherit;text-decoration:none;">🗺 Google Maps</a></span>
+    </div>
+  </div>
+</div>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🚗 集合・乘車資訊</h2></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">📍 集合地點：捷運新北產業園區站　<strong style="color:var(--text);">08:30 集合</strong></p>
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead><tr><th>車輛</th><th>車牌</th><th>駕駛</th><th>可載人數</th><th>乘客</th></tr></thead>
+        <tbody>
+          <tr><td>製片車</td><td class="car-id">CDK-0035</td><td>汪家宏</td><td>5</td><td>松鼠・子豪・千華</td></tr>
+          <tr><td>製片二車</td><td class="car-id">1667-YQ</td><td>吖杰</td><td>5</td><td>瑩瑩・小莊・妍希</td></tr>
+          <tr><td>導演車</td><td class="car-id">AWG-2750</td><td>張不乙</td><td>3</td><td>—</td></tr>
+          <tr><td>美術車</td><td class="car-id">AKG-0190</td><td>朵拉</td><td>3</td><td>—</td></tr>
+          <tr><td>燈光車</td><td class="car-id car-pending">待確認</td><td class="car-pending">待確認</td><td>—</td><td>—</td></tr>
+          <tr><td>攝影車</td><td class="car-id">AQH-1607</td><td>歐峻名</td><td>5</td><td>—</td></tr>
+          <tr><td>貨車</td><td class="car-id">6T-9623</td><td>林沫呈</td><td>2</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sh" style="margin-top:32px;"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-wrap">
+      <table class="weather-table">
+        <thead><tr><th>日期</th><th>地點</th><th>天氣狀況</th><th>降雨機率</th></tr></thead>
+        <tbody>
+          <tr><td>05/15（五）</td><td>宜蘭</td><td>陰時多雲，有短暫陣雨</td><td class="w-rain-high">60%</td></tr>
+          <tr class="w-today"><td><strong>05/16（六）★</strong></td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+          <tr><td>05/18（一）</td><td>五股</td><td>多雲，午後短暫雷陣雨</td><td class="w-rain-mid">40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead><tr><th>時間</th><th>類型</th><th>場次</th><th>地點</th><th>時段／景</th><th>戲時</th><th>頁／顆</th><th>劇情摘要</th><th>演員</th></tr></thead>
+        <tbody>
+          <tr class="r-prep"><td class="t-time">09:00–10:00</td><td><span class="sb sb-prep">準備</span></td><td colspan="7">🍳 早餐・技術 Setting・演員妝髮服 35min（阿肥、和民）・演員妝髮服 75min（淑芬）・製片陳設疏化 / 點心桌</td></tr>
+          <tr class="r-shoot"><td class="t-time">10:00–12:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 6A</td><td class="t-loc">沙拉油工廠卸貨區</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">7:05</td><td class="t-pg">1.2p&nbsp;/&nbsp;15顆</td><td class="t-desc">阿肥隨著廣播音樂《Crazy》跳舞，和民、淑芬唱起歌仔戲，淑芬稱讚阿肥</td><td class="t-cast">阿肥<br>和民<br>淑芬</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note-new"><span class="pn-tag">陳設</span>車內陳設組・後斗空 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・淑芬卡帶機・點貨板夾・銷貨單・筆 <span class="pn-tag">特道</span>油桶（現場）・棧板（現場）・堆高機（現場沫呈爸操作）<span class="pn-tag">攝影</span>穩定器 <span class="pn-tag">收音</span>同步錄音、Crazy 段落 MOS <span class="pn-tag">播歌</span>Crazy（製片音響）<span class="pn-tag">單收</span>開/關車門・阿肥喘息・腳步</div></td></tr>
+          <tr class="r-prep"><td class="t-time">12:30–13:15</td><td><span class="sb sb-lunch">午餐</span></td><td colspan="7">🍱 午餐・演員換裝：歌仔戲服 15min（和民、淑芬）</td></tr>
+          <tr class="r-shoot"><td class="t-time">13:15–13:45</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 6B</td><td class="t-loc">沙拉油工廠卸貨區</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">7:05</td><td class="t-pg">0.2p&nbsp;/&nbsp;2顆</td><td class="t-desc">阿肥眼裡和民、淑芬穿著歌仔戲服唱戲</td><td class="t-cast">阿肥<br>和民<br>淑芬</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note-new"><span class="pn-tag">服裝</span>【民3】歌仔戲服・【芬2】歌仔戲服 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・淑芬卡帶機・點貨板夾・銷貨單 <span class="pn-tag">收音</span>同步錄音</div></td></tr>
+          <tr class="r-prep"><td class="t-time">13:45–14:00</td><td><span class="sb sb-prep">換裝</span></td><td colspan="7">🔄 技術 Setting・演員換裝 15min（和民、淑芬）</td></tr>
+          <tr class="r-shoot"><td class="t-time">14:00–16:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 7</td><td class="t-loc">沙拉油工廠後車板</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">7:10</td><td class="t-pg">1.5p&nbsp;/&nbsp;15顆</td><td class="t-desc">阿肥、和民一起隨著《滿滿滿》音樂裝貨，將油桶裝滿貨車後斗</td><td class="t-cast">阿肥<br>和民<br>淑芬</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note-new"><span class="pn-tag">道具</span>手套・和民手機・銷貨單 15 張・繩子 <span class="pn-tag">特道</span>油桶・棧板（現場）<span class="pn-tag">收音</span>開頭對話同步錄音、歌舞段落 MOS（演員對嘴）<span class="pn-tag">播歌</span>滿滿滿（製片音響）<span class="pn-tag">單收</span>油桶拖拉聲</div></td></tr>
+          <tr class="r-prep"><td class="t-time">16:30–16:45</td><td><span class="sb sb-prep">換場</span></td><td colspan="7">🔄 技術 Setting・美術組陳設貨車後斗（駕駛座後窗油桶）</td></tr>
+          <tr class="r-shoot"><td class="t-time">16:45–18:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 8</td><td class="t-loc">沙拉油工廠貨車上</td><td><span class="tag t-day">日</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-tc">8:00</td><td class="t-pg">1.3p&nbsp;/&nbsp;4顆</td><td class="t-desc">準備出發，和民想趕快送完貨、回家練舞，阿肥藉故拒絕，和民開玩笑阿肥是想去看西施</td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-props"><td colspan="9"><div class="props-note-new"><span class="pn-tag">陳設</span>車內陳設組・後斗滿 <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・車內油桶 <span class="pn-tag">燈光</span>粉紅燈光（轉場）<span class="pn-tag">收音</span>同步錄音 <span class="pn-tag">單收</span>引擎發動</div></td></tr>
+          <tr class="r-wrap"><td class="t-time">18:00 收工</td><td><span class="sb sb-wrap">收工</span></td><td colspan="7">場復・Day 4 收工</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🎭 今日出席演員</h2></div>
+    <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px;">
+      <table class="ct">
+        <thead><tr><th>角色</th><th>演員</th><th>出席場次</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿肥</strong></td><td>陳昱安（蛋寶）</td><td><span class="on">S6A · S6B · S7 · S8</span></td><td>—</td></tr>
+          <tr><td><strong>和民</strong></td><td>林沫呈</td><td><span class="on">S6A · S6B · S7 · S8</span></td><td>—</td></tr>
+          <tr><td><strong>淑芬</strong></td><td>楊瑩瑩</td><td><span class="on">S6A · S6B · S7</span></td><td>妝髮服 75min</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-section">
+      <div class="costume-title">阿肥 · 和民</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTGn60_E_PrBGqVipuQ8er4sBpsCBAALwDmsbHtLYV3l59ZZ0Nhf7AQADAgADdwADOwQ.png" alt="阿肥一般裝"><div class="si-label"><div class="sn">陳昱安（蛋寶）</div><div class="st">【肥3】一般裝</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTWn61F_hecaiWMhYHZA4elbYzwFwAALxDmsbHtLYV_xtcejQtW4LAQADAgADdwADOwQ.png" alt="和民服裝"><div class="si-label"><div class="sn">林沫呈</div><div class="st">【民2】</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">歌仔戲服 · 淑芬</div>
+      <div class="cg2">
+        <div class="si-card"><div class="noimg">📷 待補</div><div class="si-label"><div class="sn">S 6B · 林沫呈</div><div class="st">【民3】歌仔戲服</div></div></div>
+        <div class="si-card"><div class="noimg">📷 待補</div><div class="si-label"><div class="sn">S 6B · 楊瑩瑩</div><div class="st">【芬2】歌仔戲服</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">淑芬 — 楊瑩瑩</div>
+      <div style="max-width:320px;">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDUGn692VeYg2b3x9DldZfrJypx49xAALFD2sbHtLYV88gblGJvjjjAQADAgADdwADOwQ.png" alt="淑芬定裝"><div class="si-label"><div class="sn">S 6A · S 7</div><div class="st">【芬1】</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /day4 -->
+
+<!-- ════════════════════════════════════════
+     DAY 5 殺青
+════════════════════════════════════════ -->
+<div id="day5" class="slide">
+<div class="chapter wrap-chapter">
+  <div class="chapter-daynum" style="color:rgba(192,50,8,.2);">05</div>
+  <div class="chapter-inner">
+    <div class="chapter-label" style="color:rgba(240,112,80,.7);">Day Five · 2026.05.18（一）· 🎬 殺青</div>
+    <h2 class="chapter-title">五股黑棚・廣晟影業</h2>
+    <p class="chapter-sub">幻想場景全輯</p>
+    <div class="chapter-meta">
+      <span class="chapter-tag">🎬 S1 · S9A · S9B · S14B · S16</span>
+      <span class="chapter-tag">👥 全體演員</span>
+      <span class="chapter-tag">08:00 集合</span>
+      <span class="chapter-tag">21:00 殺青</span>
+      <span class="chapter-tag"><a href="https://maps.app.goo.gl/xHyJf8FmCroPpN347" target="_blank" style="color:inherit;text-decoration:none;">🗺 Google Maps</a></span>
+    </div>
+  </div>
+</div>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🚗 集合・乘車資訊</h2></div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">📍 集合上車點 <strong style="color:var(--text);">08:00</strong>　機捷新莊副都心站 1號出口</p>
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead><tr><th>車輛</th><th>車牌</th><th>駕駛</th><th>可載人數</th><th>乘客</th></tr></thead>
+        <tbody>
+          <tr><td>1號製片車</td><td class="car-id">CDK-0035</td><td>汪家宏</td><td>5</td><td>妍希・松鼠・羽文・維亞・小蘋果（美玉）&ensp;<span style="color:var(--muted);font-size:12px;">08:00 集合</span></td></tr>
+          <tr><td>2號製片車</td><td class="car-id">—</td><td>劉岳銘 小明</td><td>5</td><td>蛋寶・小莊・千華&ensp;<span style="color:var(--muted);font-size:12px;">08:00 集合</span></td></tr>
+          <tr><td>3號製片車</td><td class="car-id">—</td><td>郭子豪</td><td>8</td><td>子田・Miya・王為・思竺</td></tr>
+          <tr><td>導演車</td><td class="car-id">AWG-2750</td><td>張不乙</td><td>3</td><td>—</td></tr>
+          <tr><td>美術車</td><td class="car-id">AKG-0190</td><td>朵拉</td><td>3</td><td>瑩瑩</td></tr>
+          <tr><td>燈光車</td><td class="car-id car-pending">待確認</td><td class="car-pending">待確認</td><td>—</td><td>—</td></tr>
+          <tr><td>攝影車</td><td class="car-id">AQH-1607</td><td>歐峻名</td><td>5</td><td>—</td></tr>
+          <tr><td>貨車</td><td class="car-id">6T-9623</td><td>林沫呈</td><td>2</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead><tr><th>時間</th><th>類型</th><th>場次</th><th>地點</th><th>時段／景</th><th>頁／顆</th><th>劇情摘要 / 道具備註</th><th>演員</th></tr></thead>
+        <tbody>
+          <tr class="r-prep"><td class="t-time">08:00–09:00</td><td><span class="sb sb-prep">準備</span></td><td colspan="6">🍳 早餐・技術 Setting・美術陳設 S1 ＆ S14B 貨車後斗・演員妝髮服 35min（阿肥、和民）</td></tr>
+          <tr class="r-shoot"><td class="t-time">09:00–09:45</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 1</td><td class="t-loc">黑棚・節目夢境</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-pg">1.2p&nbsp;/&nbsp;5顆</td><td class="t-desc">阿肥夢境中焦慮地跳著《放手追夢》舞蹈<div class="props-note" style="margin-top:6px;"><strong>服裝</strong> 表演裝（肥1）｜<strong>陳設</strong> 鏡球、彩色紙花｜<strong>燈光</strong> Spot Light、各色色光、煙機｜<strong>場務</strong> 地軌｜<strong>攝影</strong> 變形效果濾鏡｜<strong>播歌</strong> 放手追夢（廣晟音響）MOS｜<strong>單收</strong> 阿肥喘息、腳步｜<strong>本場拍攝 60格</strong></div></td><td class="t-cast">阿肥</td></tr>
+          <tr class="r-prep"><td class="t-time">09:45–10:15</td><td><span class="sb sb-prep">轉景</span></td><td colspan="6">🔄 轉景技術 Setting・演員換裝 15min（阿肥）・演員妝髮服 85min（美玉）</td></tr>
+          <tr class="r-shoot"><td class="t-time">10:15–10:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 9B</td><td class="t-loc">黑棚・西施幻想</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-pg">0.2p&nbsp;/&nbsp;2顆</td><td class="t-desc">阿肥、和民坐在車上看西施跳舞<div class="props-note" style="margin-top:6px;"><strong>道具</strong> 礦泉水、手套、隨身聽、音源線、和民手機、車內油桶｜<strong>播歌</strong> 妹妹呦（廣晟音響）MOS 演員對嘴</div></td><td class="t-cast">阿肥<br>和民</td></tr>
+          <tr class="r-prep"><td class="t-time">10:30–11:00</td><td><span class="sb sb-prep">轉景</span></td><td colspan="6">🔄 轉景技術 Setting</td></tr>
+          <tr class="r-shoot"><td class="t-time">11:00–12:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 16</td><td class="t-loc">黑棚・夢想幻想</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-pg">2p&nbsp;/&nbsp;9顆</td><td class="t-desc">貨車上，美玉出現安慰阿肥，美玉唱起《別害怕》，拿起蠟筆在貨車前檔玻璃上畫畫<div class="props-note" style="margin-top:6px;"><strong>特道</strong> 阿肥的畫、玻璃蠟筆｜<strong>燈光</strong> 星光｜<strong>播歌</strong> 別害怕（美玉戴無線耳機，頭髮蓋住）同步錄音演員真唱｜核對 match cut 鏡頭數值</div></td><td class="t-cast">阿肥<br>美玉</td></tr>
+          <tr class="r-prep"><td class="t-time">12:30–14:30</td><td><span class="sb sb-lunch">午餐</span></td><td colspan="6">🍱 午餐・轉景技術 Setting・美術組陳設 S14B&emsp;<span style="color:var(--muted);font-size:12px;">妝髮服 85min（淑芬、Miya）・85min（子田）・35min（警察）・85min（思竺 15:00 到）</span></td></tr>
+          <tr class="r-shoot"><td class="t-time">14:30–17:30</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 14B</td><td class="t-loc">黑棚・懇求幻想</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-pg">0.8p&nbsp;/&nbsp;9顆</td><td class="t-desc">貨車後車板成為舞台，阿肥帶領所有人一起唱跳《乖乖》，懇求警察<div class="props-note" style="margin-top:6px;"><strong>陳設</strong> 後斗舞台組（側邊架立起）｜<strong>道具</strong> 麥克風架｜<strong>特道</strong> 拉砲 10 支｜<strong>場務</strong> 搖臂｜<strong>攝影</strong> 穩定器｜<strong>播歌</strong> 乖乖（廣晟音響）MOS｜<strong>單收</strong> 拉炮聲</div></td><td class="t-cast">阿肥<br>和民<br>淑芬<br>美玉<br>警察<br>西施×3</td></tr>
+          <tr class="r-prep"><td class="t-time">17:30–18:30</td><td><span class="sb sb-lunch">晚餐</span></td><td colspan="6">🍜 晚餐・轉景技術 Setting・美術組陳設 S9A</td></tr>
+          <tr class="r-shoot"><td class="t-time">18:30–21:00</td><td><span class="sb sb-shoot">拍攝</span></td><td class="t-scene">S 9A</td><td class="t-loc">黑棚・西施幻想</td><td><span class="tag t-night">夜</span>&nbsp;<span class="tag t-int">內</span></td><td class="t-pg">2p&nbsp;/&nbsp;8顆</td><td class="t-desc">阿肥幻想，西施三人組隨著《妹妹呦》音樂跳舞<div class="props-note" style="margin-top:6px;"><strong>陳設</strong> 3 組流蘇/燈管、3 張高腳椅、氣球海｜<strong>場務</strong> 搖臂｜<strong>攝影</strong> 穩定器｜<strong>播歌</strong> 妹妹呦（廣晟音響）MOS 演員對嘴｜<strong>單收</strong> 西施高跟鞋腳步</div></td><td class="t-cast">阿肥<br>西施×3</td></tr>
+          <tr class="r-wrap"><td class="t-time">21:00 殺青</td><td><span class="sb sb-wrap">殺青</span></td><td colspan="6">🎬 殺青・場復・收工　感謝全體組員辛苦了！</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>🎭 今日出席演員</h2></div>
+    <div style="overflow-x:auto; border:1px solid var(--border); border-radius:8px;">
+      <table class="ct">
+        <thead><tr><th>角色</th><th>演員</th><th>出席場次</th><th>通告時間</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿肥</strong></td><td>陳昱安（蛋寶）</td><td><span class="on">S1 · S9B · S16 · S14B · S9A</span></td><td>08:30</td></tr>
+          <tr><td><strong>和民</strong></td><td>林沫呈</td><td><span class="on">S9B · S14B</span></td><td>08:30</td></tr>
+          <tr><td><strong>美玉</strong></td><td>陳映如（小蘋果）</td><td><span class="on">S16 · S14B</span></td><td>08:00</td></tr>
+          <tr><td><strong>淑芬</strong></td><td>楊瑩瑩</td><td><span class="on">S14B</span></td><td>10:00</td></tr>
+          <tr><td><strong>警察</strong></td><td>王為</td><td><span class="on">S14B</span></td><td>13:00</td></tr>
+          <tr><td><strong>西施</strong></td><td>Miya</td><td><span class="on">S14B · S9A</span></td><td>13:00</td></tr>
+          <tr><td><strong>西施</strong></td><td>何子田</td><td><span class="on">S14B · S9A</span></td><td>13:00</td></tr>
+          <tr><td><strong>西施</strong></td><td>吳思竺</td><td><span class="on">S14B · S9A</span></td><td>15:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sp-cream sp-pad">
+  <div class="wrap">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-section">
+      <div class="costume-title">阿肥 · 和民</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDUWn6_N5kXEDMjrS5OR2qR8f54-4yAALlD2sbHtLYV_P_quiexZQLAQADAgADdwADOwQ.png" alt="阿肥定裝"><div class="si-label"><div class="sn">陳昱安（蛋寶）· S1 · S9A · S9B · S14B · S16</div><div class="st">【肥3】全日同一套</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTWn61F_hecaiWMhYHZA4elbYzwFwAALxDmsbHtLYV_xtcejQtW4LAQADAgADdwADOwQ.png" alt="和民服裝"><div class="si-label"><div class="sn">林沫呈 · S9B · S14B</div><div class="st">【民2】</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">美玉 · 淑芬</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDTmn62hySG0hsvkpGm-B3-pE2kW5VAAIHD2sbHtLYV5mn8fWXAAFS3gEAAwIAA3cAAzsE.png" alt="美玉定裝"><div class="si-label"><div class="sn">陳映如（小蘋果）· S16 · S14B</div><div class="st">【玉1】</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDUGn692VeYg2b3x9DldZfrJypx49xAALFD2sbHtLYV88gblGJvjjjAQADAgADdwADOwQ.png" alt="淑芬定裝"><div class="si-label"><div class="sn">楊瑩瑩 · S14B</div><div class="st">【芬1】</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">警察 · 西施 Miya</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDT2n67fRheKys6FkSy6EQO4sxk0nUAAKHD2sbHtLYV64OsKRg63EsAQADAgADdwADOwQ.png" alt="警察定裝"><div class="si-label"><div class="sn">王為 · S14B</div><div class="st">【警1】警察制服</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDUmn6_TdSBim55Jw-83IoHWN9Na_wAALxD2sbHtLYV417aVnK90K0AQADAgADdwADOwQ.png" alt="西施 Miya"><div class="si-label"><div class="sn">Miya · S9A · S14B</div><div class="st">【西1】西施</div></div></div>
+      </div>
+    </div>
+    <div class="costume-section">
+      <div class="costume-title">西施 何子田 · 西施 吳思竺</div>
+      <div class="cg2">
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDU2n6_WE59CJOzyurD3fqNVvpmo8uAAL1D2sbHtLYV9bCN8et6NSdAQADAgADdwADOwQ.png" alt="西施 何子田"><div class="si-label"><div class="sn">何子田 · S9A · S14B</div><div class="st">【西2】西施</div></div></div>
+        <div class="si-card"><img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDVGn6_XrhBRbi-AQBAaz0vI2VsVNnAAL3D2sbHtLYV0zR_lW4vuN2AQADAgADdwADOwQ.png" alt="西施 吳思竺"><div class="si-label"><div class="sn">吳思竺 · S9A · S14B</div><div class="st">【西3】西施</div></div></div>
+      </div>
+    </div>
+
+    <div class="sh" style="margin-top:32px;"><h2>⚠️ 注意事項</h2></div>
+    <ul class="notes">
+      <li><span class="ic">🚬</span><span>有 <strong>蛋寶</strong> 在場的任何地方，<strong>禁止吸菸（含電子菸）</strong>。</span></li>
+      <li><span class="ic">♻️</span><span>黑棚內垃圾請務必做好 <strong>分類</strong>，維持棚內整潔。</span></li>
+      <li><span class="ic">🚬</span><span>吸菸請至棚外 <strong>吸菸區</strong>，棚內禁止吸菸。</span></li>
+      <li><span class="ic">💥</span><span>S14B 使用 <strong>拉砲 10 支</strong>，使用前確認安全範圍，注意周邊人員。</span></li>
+      <li><span class="ic">🎵</span><span>S16 美玉演員真唱，<strong>無線耳機頭髮蓋住</strong>，拍攝前請造型組確認。</span></li>
+    </ul>
+  </div>
+</section>
+</div><!-- /day5 -->
+
+<!-- 殺青橫幅 -->
+<div class="wrap-banner">
+  <div class="wb-title">🎬 殺　青</div>
+  <div class="wb-sub">《貨車男孩》Truck Boy · 2026.05.18（一）· 感謝全體組員辛苦了！</div>
+</div>
+
+<footer class="footer">
+  <strong>貨車男孩 TRUCK BOY</strong>　·　2025 短片製作　·　國立臺灣藝術大學 電影系碩士班<br>
+  導演：林沫呈　·　製作簡報
+</footer>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('#nav-dots a');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        dots.forEach(d => d.classList.remove('active'));
+        const active = document.querySelector(`#nav-dots a[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  slides.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
