@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《貨車男孩》補拍通告 — 05/17 宜蘭外景</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="貨車男孩">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:       #D4960C;
+      --amber:      #A06800;
+      --amber-lt:   #C48000;
+      --blue:       #1A6A9E;
+      --green:      #1E7A40;
+      --red:        #C03208;
+      --text:       #1A0E04;
+      --sub:        #4A3A28;
+      --muted:      #8A7A60;
+      --border:     rgba(0,0,0,0.12);
+      --border-sm:  rgba(0,0,0,0.06);
+      --white:      #FFFFFF;
+      --off-white:  #FFFBF5;
+      --shadow:     0 2px 12px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--gold);
+      color: var(--text);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+
+    /* ─── COVER HERO ── */
+    #cover-hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 20px 60px;
+      position: relative;
+    }
+    #cover-hero img.cover-img {
+      width: min(560px, 92vw);
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .cover-label { margin-top: 28px; text-align: center; }
+    .cover-label .cl-day {
+      font-size: 11px; font-weight: 900; letter-spacing: .22em;
+      color: var(--white);
+      background: rgba(0,0,0,.45);
+      padding: 4px 16px; display: inline-block;
+      margin-bottom: 12px;
+    }
+    .cover-label .cl-title { font-size: clamp(22px, 5vw, 36px); font-weight: 900; color: var(--text); }
+    .cover-label .cl-sub { font-size: 14px; color: var(--sub); margin-top: 6px; letter-spacing: .06em; }
+    .scroll-hint {
+      position: absolute; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      opacity: .55; animation: bounce 1.8s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size: 11px; letter-spacing: .15em; color: var(--sub); }
+    .scroll-hint svg  { width: 18px; color: var(--sub); }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ─── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; padding: 0 20px;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-brand {
+      font-size: 13px; font-weight: 900; color: var(--text);
+      white-space: nowrap; padding: 15px 18px 15px 0;
+      border-right: 1px solid var(--border); margin-right: 4px; flex-shrink: 0;
+    }
+    .nav-link {
+      padding: 15px 14px; color: var(--sub);
+      text-decoration: none; font-size: 13px; font-weight: 500;
+      white-space: nowrap; letter-spacing: .04em;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover, .nav-link.act { color: var(--text); border-bottom-color: var(--gold); }
+
+    /* ─── SECTION PANEL ── */
+    .section-panel {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-panel::after {
+      content: '';
+      position: absolute;
+      bottom: 14px; right: 18px;
+      width: 110px; height: 73px;
+      background: url('https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHmnwWa-Ybnu5cM52uPZXx54DJtqLAALAD2sbE7WBV4vs7qMOZuE4AQADAgADdwADOwQ.png')
+                  center / contain no-repeat;
+      opacity: 1;
+      pointer-events: none;
+    }
+    .section-panel + .section-panel { margin-top: 12px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 100px; }
+
+    /* ─── DAY HERO ── */
+    .day-hero {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 48px 24px 40px;
+    }
+    .day-hero-inner { max-width: 1000px; margin: 0 auto; }
+    .badge {
+      display: inline-block;
+      background: var(--gold); color: var(--white);
+      font-size: 10px; font-weight: 900;
+      letter-spacing: .18em; padding: 4px 14px;
+      margin-bottom: 14px;
+    }
+    /* 補拍 badge 特殊色 */
+    .badge-reshoots {
+      background: var(--red);
+    }
+    .day-title { font-size: clamp(26px, 6vw, 46px); font-weight: 900; line-height: 1.2; color: var(--text); }
+    .day-sub   { font-size: 15px; color: var(--sub); margin-top: 6px; }
+    .day-meta  { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; }
+    .meta { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--sub); }
+    .meta strong { color: var(--text); font-weight: 700; }
+
+    /* ─── SECTION HEADING ── */
+    .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .sh h2 {
+      font-size: 17px; font-weight: 900; color: var(--text);
+      white-space: nowrap;
+      padding-left: 12px;
+      border-left: 4px solid var(--gold);
+    }
+    .sh::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ─── CALLTIME ── */
+    .calltime-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .ct-box {
+      border: 2px solid var(--gold); padding: 20px 24px; text-align: center;
+    }
+    .ct-box .ct-label {
+      font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .ct-box .ct-time {
+      font-size: 40px; font-weight: 900; color: var(--text); line-height: 1;
+    }
+    .ct-box .ct-who { font-size: 13px; color: var(--sub); margin-top: 8px; }
+
+    /* 集合點提示 */
+    .calltime-note {
+      margin-top: 16px;
+      background: #FFF8E6;
+      border: 1px solid rgba(160,104,0,.2);
+      border-left: 3px solid var(--amber);
+      padding: 12px 16px;
+      font-size: 13px; color: var(--sub); line-height: 1.65;
+    }
+    .calltime-note strong { color: var(--text); }
+
+    /* ─── CREW ── */
+    .crew-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px 32px;
+    }
+    .crew-dept-title {
+      font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--amber);
+      border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 2px;
+    }
+    .crew-row {
+      display: flex; align-items: baseline; gap: 0;
+      padding: 5px 0; border-bottom: 1px solid var(--border-sm);
+    }
+    .crew-row:last-child { border-bottom: none; }
+    .crew-role {
+      width: 72px; flex-shrink: 0;
+      font-size: 11px; color: var(--muted);
+    }
+    .crew-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--text); }
+    .crew-phone {
+      font-size: 12px; font-weight: 700; color: var(--amber);
+      text-decoration: none; white-space: nowrap;
+    }
+    .crew-phone:hover { color: var(--amber-lt); }
+    .crew-dash { font-size: 12px; color: var(--muted); }
+
+    /* ─── TRANSPORT ── */
+    .transport-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); }
+    .transport-table {
+      width: 100%; border-collapse: collapse; font-size: 14px; min-width: 480px;
+    }
+    .transport-table thead th {
+      font-size: 10px; font-weight: 900; letter-spacing: .14em; color: var(--amber);
+      padding: 10px 12px; text-align: left; background: #FFF8E6;
+      border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    .transport-table tbody td {
+      padding: 10px 12px; border-bottom: 1px solid var(--border-sm); vertical-align: middle;
+    }
+    .transport-table tbody tr:last-child td { border-bottom: none; }
+    .car-id { font-size: 11px; color: var(--sub); font-weight: 700; letter-spacing: .05em; }
+    .car-pending { font-size: 12px; color: var(--muted); font-style: italic; }
+
+    /* 手機版乘車卡片 */
+    .car-cards { display: none; }
+    @media (max-width: 700px) {
+      .transport-wrap { display: none; }
+      .car-cards { display: flex; flex-direction: column; gap: 8px; }
+    }
+    .car-card {
+      border: 1px solid var(--border); border-left: 4px solid var(--amber);
+      padding: 12px 14px; background: #FFFFFF;
+    }
+    .car-card-top {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 4px;
+    }
+    .car-card-name { font-size: 15px; font-weight: 900; color: var(--text); }
+    .car-card-row { font-size: 13px; color: var(--sub); margin-top: 3px; }
+    .car-card-row strong { color: var(--text); }
+
+    /* ─── WEATHER ── */
+    .weather-box {
+      margin-top: 24px;
+      background: #FFFBF0;
+      border: 1px solid rgba(160,104,0,.2);
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .weather-icon { font-size: 48px; line-height: 1; }
+    .weather-info { flex: 1; }
+    .weather-title { font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+    .weather-desc  { font-size: 14px; color: var(--sub); line-height: 1.6; }
+    .weather-alert {
+      background: #FFF0EA;
+      border: 1px solid rgba(200,58,10,.25);
+      border-left: 3px solid var(--red);
+      padding: 10px 14px;
+      font-size: 13px; color: var(--text); line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    /* ─── SCHEDULE TABLE ── */
+    .sch-wrap {
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--border);
+    }
+    .sch {
+      width: 100%; border-collapse: collapse;
+      font-size: 15px; min-width: 680px;
+    }
+    .sch thead tr { background: #FFF8E6; border-bottom: 2px solid var(--border); }
+    .sch thead th {
+      color: var(--amber); font-size: 10px; font-weight: 900;
+      letter-spacing: .14em; padding: 10px 12px;
+      text-align: left; white-space: nowrap;
+    }
+    .sch tbody tr { border-bottom: 1px solid var(--border-sm); }
+    .sch tbody tr:last-child { border-bottom: none; }
+    .sch tbody tr td          { background: #FFFFFF; }
+    .sch tbody tr.r-prep td  { background: #F5F5F5; color: var(--sub); }
+    .sch tbody tr.r-lunch td { background: #F0F7F2; }
+    .sch tbody tr.r-wrap td   { background: #FFF0EC; }
+    .sch tbody tr.r-makeup td { background: #FDF0F6; }
+    .sch td { padding: 11px 12px; vertical-align: middle; line-height: 1.55; }
+
+    .t-time  { font-size: 12px; font-weight: 700; color: var(--amber); white-space: nowrap; }
+    .t-scene { font-weight: 900; font-size: 14px; white-space: nowrap; color: var(--amber); }
+    .t-loc   { min-width: 90px; font-weight: 600; }
+    .t-desc  { min-width: 160px; font-size: 14px; }
+    .t-cast  { min-width: 90px; font-size: 12px; line-height: 1.7; }
+    .t-dur   { white-space: nowrap; color: var(--sub); font-size: 12px; }
+
+    .sb {
+      display: inline-block; font-size: 10px; font-weight: 900;
+      padding: 2px 8px; letter-spacing: .06em; white-space: nowrap;
+    }
+    .sb-shoot { background: var(--amber);              color: var(--white); }
+    .sb-prep  { background: rgba(154,128,112,.2);      color: var(--muted); border: 1px solid rgba(154,128,112,.3); }
+    .sb-lunch { background: rgba(107,184,122,.15);     color: var(--green); border: 1px solid rgba(107,184,122,.3); }
+    .sb-wrap  { background: rgba(212,80,30,.15);       color: var(--red);   border: 1px solid rgba(212,80,30,.3); }
+
+    /* 道具備註列 */
+    .r-props td { padding: 0 !important; }
+    .props-note {
+      font-size: 11.5px; color: var(--muted); line-height: 1.7;
+      padding: 7px 16px 10px 32px;
+      background: #F9F7F4; border-left: 3px solid #DDD6C8;
+    }
+    .pn-tag {
+      display: inline-block; font-size: 10px; font-weight: 900;
+      letter-spacing: .08em; color: var(--amber);
+      background: #FFF3D0; padding: 1px 6px;
+      border-radius: 3px; margin-right: 4px;
+    }
+
+    /* 手機版行程卡片 */
+    .sch-cards { display: none; }
+    @media (max-width: 700px) {
+      .sch-wrap  { display: none; }
+      .sch-cards { display: flex; flex-direction: column; gap: 0; }
+    }
+    .sc-prep {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-left: 3px solid var(--border);
+      background: #F9F7F4; margin-bottom: 8px;
+    }
+    .sc-prep-time { flex-shrink: 0; width: 90px; font-size: 11px; font-weight: 700; color: var(--amber); padding-top: 2px; }
+    .sc-prep-text { font-size: 13px; color: var(--sub); line-height: 1.65; }
+    .sc-mcard {
+      background: #FFFFFF; border: 1px solid var(--border);
+      border-left: 4px solid var(--amber); padding: 14px 16px; margin-bottom: 10px;
+    }
+    .sc-mcard.lunch-card { border-left-color: var(--green); background: #F0F7F2; }
+    .sc-mcard.wrap-card  { border-left-color: var(--red);   background: #FFF0EA; }
+    .sc-mcard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .sc-mcard-left { display: flex; align-items: center; gap: 10px; }
+    .sc-mnum { background: var(--amber); color: var(--white); font-size: 11px; font-weight: 900; padding: 3px 10px; letter-spacing: .08em; }
+    .sc-mloc  { font-size: 15px; font-weight: 700; }
+    .sc-mtime { font-size: 12px; font-weight: 700; color: var(--amber); white-space: nowrap; }
+    .sc-mdesc {
+      font-size: 14px; line-height: 1.65; color: var(--text);
+      padding: 8px 10px; background: rgba(0,0,0,.04);
+      border-left: 2px solid var(--border); margin-bottom: 10px;
+    }
+    .sc-mfoot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .sc-mcast { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sc-mstats { display: flex; gap: 10px; }
+    .sc-mstat { font-size: 11px; color: var(--sub); }
+    .sc-mstat span { color: var(--text); font-weight: 700; }
+
+    /* ─── LOCATION ── */
+    .loc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .loc-card { background: #FFFFFF; border: 1px solid var(--border); overflow: hidden; }
+    .loc-info  { padding: 16px; }
+    .loc-name  { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .loc-time  { font-size: 13px; color: var(--amber); margin-bottom: 6px; }
+    .loc-sub   { font-size: 13px; color: var(--muted); }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--blue);
+      text-decoration: none; transition: opacity .2s;
+      margin-top: 10px;
+    }
+    .ext-link:hover { opacity: .75; text-decoration: underline; }
+
+    /* ─── SCENE CARDS ── */
+    .sc-card {
+      background: #FFFFFF; border: 1px solid var(--border);
+      border-left: 3px solid var(--amber); padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+    .sc-card:last-child { margin-bottom: 0; }
+    .sc-card-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .sc-card-left { display: flex; flex-direction: column; gap: 8px; }
+    .sc-num-row { display: flex; align-items: center; gap: 10px; }
+    .sc-num {
+      background: var(--amber); color: var(--white);
+      font-size: 10px; font-weight: 900;
+      padding: 2px 9px; letter-spacing: .1em; flex-shrink: 0;
+    }
+    .sc-loc { font-size: 16px; font-weight: 700; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 11px; padding: 2px 8px; border: 1px solid; letter-spacing: .04em; white-space: nowrap; display: inline-block; }
+    .t-day  { border-color: var(--amber);  color: var(--amber); }
+    .t-ext  { border-color: var(--green);  color: var(--green); }
+    .t-int  { border-color: #907050;       color: #907050; }
+    .sc-stats { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+    .stat { font-size: 12px; color: var(--muted); text-align: center; }
+    .stat .val { font-size: 16px; font-weight: 700; color: var(--text); display: block; }
+    .sc-desc {
+      font-size: 14px; line-height: 1.7; color: var(--text); margin: 12px 0;
+      padding: 10px 12px; background: rgba(0,0,0,.04); border-left: 2px solid var(--border);
+    }
+    .sc-props-block {
+      font-size: 12px; color: var(--muted); line-height: 1.75;
+      padding: 8px 12px; background: #F9F7F4; border-left: 3px solid #DDD6C8;
+      margin-top: 10px;
+    }
+    .cast-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .cast-tag {
+      font-size: 12px; padding: 3px 10px;
+      background: #FFF3D0; border: 1px solid #C8A020; color: #7A5000;
+    }
+
+    /* ─── COSTUME ── */
+    .costume-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .costume-item {
+      background: #FFFFFF; border: 1px solid var(--border);
+      padding: 16px 18px;
+    }
+    .costume-who { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .costume-type { font-size: 12px; color: var(--amber); margin-bottom: 2px; font-weight: 700; letter-spacing: .04em; }
+    .costume-note { font-size: 12px; color: var(--muted); }
+
+    /* ─── NOTES ── */
+    .notes { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .notes li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #FFFFFF;
+      border: 1px solid var(--border); border-left: 3px solid var(--red);
+      font-size: 14px; line-height: 1.65;
+    }
+    .notes li .ic { font-size: 18px; flex-shrink: 0; padding-top: 1px; }
+
+    /* ─── DIRECTOR WATERMARK ── */
+    #dir-mark {
+      position: fixed; bottom: 20px; right: 20px;
+      font-size: 11px; letter-spacing: .18em; color: rgba(0,0,0,.4);
+      pointer-events: none; z-index: 50; font-weight: 700;
+    }
+
+    /* ─── FAB ── */
+    #fab-schedule {
+      position: fixed; bottom: 24px; left: 20px;
+      background: var(--amber); color: var(--white);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px; font-weight: 900; letter-spacing: .08em;
+      padding: 11px 20px; text-decoration: none;
+      z-index: 200; box-shadow: 0 6px 24px rgba(0,0,0,.5);
+      border-radius: 2px; transition: background .2s, transform .2s;
+      display: flex; align-items: center; gap: 7px;
+    }
+    #fab-schedule:hover { background: var(--amber-lt); transform: translateY(-2px); }
+
+    /* ─── FOOTER ── */
+    .footer { background: var(--text); margin-top: 12px; padding: 32px 24px; }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .footer-left .school { font-size: 12px; color: #8A7A60; letter-spacing: .08em; margin-bottom: 4px; }
+    .footer-left .film   { font-size: 20px; font-weight: 900; color: var(--gold); }
+    .footer-left .info   { font-size: 12px; color: #8A7A60; margin-top: 4px; }
+    .footer-right        { text-align: right; }
+    .footer-right .dir   { font-size: 16px; font-weight: 700; color: var(--gold); }
+    .footer-right .org   { font-size: 12px; color: #8A7A60; margin-top: 4px; }
+
+    @media (max-width: 560px) {
+      .sch { font-size: 12px; }
+      .sch td { padding: 9px 10px; }
+    }
+
+    /* ─── SI-CARD（定裝照）── */
+    .si-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .si-card { background: #FFFFFF; border: 1px solid var(--border); overflow: hidden; }
+    .si-card img { width: 100%; display: block; }
+    .si-label { padding: 12px 14px; }
+    .si-label .sn { font-size: 11px; font-weight: 900; color: var(--amber); letter-spacing: .1em; }
+    .si-label .st { font-size: 14px; font-weight: 700; margin: 3px 0 2px; }
+    .si-label .sd { font-size: 13px; color: var(--muted); }
+    .costume-group-title {
+      font-size: 13px; font-weight: 900; color: var(--amber);
+      letter-spacing: .12em; border-bottom: 1px solid var(--border);
+      padding-bottom: 6px; margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="dir-mark">導演：林沫呈</div>
+<a id="fab-schedule" href="#schedule">📋 查看行程</a>
+
+<div id="main">
+
+  <!-- ══ COVER HERO ══ -->
+  <div id="cover-hero">
+    <img class="cover-img"
+      src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHmnwWa-Ybnu5cM52uPZXx54DJtqLAALAD2sbE7WBV4vs7qMOZuE4AQADAgADdwADOwQ.png"
+      alt="貨車男孩 主視覺">
+    <div class="cover-label">
+      <div class="cl-day">補拍 · 2026.05.17 (日)</div>
+      <div class="cl-title">拍攝通告</div>
+      <div class="cl-sub">國立臺灣藝術大學 電影系碩士班 · 導演 林沫呈</div>
+    </div>
+    <div class="scroll-hint">
+      <span>往下滑查看通告</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">《貨車男孩》</div>
+      <a class="nav-link" href="#calltime">通告時間</a>
+      <a class="nav-link" href="#crew">工作人員</a>
+      <a class="nav-link" href="#transport">乘車・天氣</a>
+      <a class="nav-link" href="#schedule">拍攝行程</a>
+      <a class="nav-link" href="#location">現場資訊</a>
+      <a class="nav-link" href="#costume">定裝照</a>
+    </div>
+  </nav>
+
+  <!-- DAY HERO -->
+  <div class="day-hero">
+    <div class="day-hero-inner">
+      <div class="badge badge-reshoots">補拍 · 2026</div>
+      <h1 class="day-title">5 月 17 日（日）宜蘭外景</h1>
+      <p class="day-sub">宜蘭縣</p>
+      <div class="day-meta">
+        <div class="meta">⏰ 整體時程 <strong>09:00 — 17:20</strong></div>
+        <div class="meta">📍 地點 <strong>宜蘭縣</strong></div>
+        <div class="meta">🎬 場次 <strong>open／S11／S12</strong></div>
+        <div class="meta">👥 演員 <strong>阿肥・和民</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CALLTIME ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="calltime">
+    <div class="sh"><h2>⏰ 通告時間</h2></div>
+    <div class="calltime-grid">
+      <div class="ct-box">
+        <div class="ct-label">全組通告</div>
+        <div class="ct-time">09:00</div>
+        <div class="ct-who">全體工作人員・演員</div>
+      </div>
+      <div class="ct-box" style="border-color:#B06090;">
+        <div class="ct-label" style="color:#804060;">妝髮開始</div>
+        <div class="ct-time" style="font-size:32px;">09:00 — 09:40</div>
+        <div class="ct-who">和民 20min ／ 蛋寶 20min</div>
+      </div>
+    </div>
+    <div class="calltime-note">
+      <strong>發車集合點：</strong>待訂　｜　請留意後續更新通知
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ CREW ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="crew">
+    <div class="sh"><h2>👥 工作人員</h2></div>
+    <div class="crew-section">
+
+      <div>
+        <div class="crew-dept-title">導演組</div>
+        <div class="crew-row">
+          <span class="crew-role">導演</span>
+          <span class="crew-name">林沫呈</span>
+          <a class="crew-phone" href="tel:0989762473">0989-762-473</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">場記</span>
+          <span class="crew-name">陳詩婷</span>
+          <a class="crew-phone" href="tel:0965665825">0965-665-825</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">製片組</div>
+        <div class="crew-row">
+          <span class="crew-role">現場製片</span>
+          <span class="crew-name">郭子豪</span>
+          <a class="crew-phone" href="tel:0978561223">0978-561-223</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">攝影組</div>
+        <div class="crew-row">
+          <span class="crew-role">攝影</span>
+          <span class="crew-name">歐峻名（香蕉）</span>
+          <a class="crew-phone" href="tel:0966862919">0966-862-919</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">攝助</span>
+          <span class="crew-name" style="color:var(--muted);font-style:italic;">—</span>
+          <span class="crew-dash">—</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">燈光組</div>
+        <div class="crew-row">
+          <span class="crew-role">燈光</span>
+          <span class="crew-name">林暐軒</span>
+          <a class="crew-phone" href="tel:0911002748">0911-002-748</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">燈助</span>
+          <span class="crew-name" style="color:var(--muted);font-style:italic;">—</span>
+          <span class="crew-dash">—</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">造型組</div>
+        <div class="crew-row">
+          <span class="crew-role">造型</span>
+          <span class="crew-name">貝兒姐</span>
+          <a class="crew-phone" href="tel:0921820436">0921-820-436</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ TRANSPORT & WEATHER ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="transport">
+    <div class="sh"><h2>🚗 乘車資訊</h2></div>
+
+    <!-- 桌機版 -->
+    <div class="transport-wrap">
+      <table class="transport-table">
+        <thead>
+          <tr>
+            <th>車輛</th>
+            <th>駕駛</th>
+            <th>載客數</th>
+            <th>備註</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="car-id">貨車</span></td>
+            <td><strong>林沫呈</strong></td>
+            <td>可載 1 人</td>
+            <td style="color:var(--muted);font-size:13px;">—</td>
+          </tr>
+          <tr>
+            <td><span class="car-id">製片車</span></td>
+            <td><strong>郭子豪</strong></td>
+            <td>可載 3 人</td>
+            <td style="color:var(--muted);font-size:13px;">—</td>
+          </tr>
+          <tr>
+            <td><span class="car-id">攝影車</span></td>
+            <td><strong>歐峻名</strong></td>
+            <td><span class="car-pending">待確認</span></td>
+            <td style="color:var(--muted);font-size:13px;">—</td>
+          </tr>
+          <tr>
+            <td><span class="car-id">燈光車</span></td>
+            <td><strong>林暐軒</strong></td>
+            <td><span class="car-pending">待確認</span></td>
+            <td style="color:var(--muted);font-size:13px;">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 手機版 -->
+    <div class="car-cards">
+      <div class="car-card">
+        <div class="car-card-top">
+          <span class="car-card-name">貨車</span>
+          <span class="car-id">林沫呈</span>
+        </div>
+        <div class="car-card-row">可載 <strong>1</strong> 人</div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-top">
+          <span class="car-card-name">製片車</span>
+          <span class="car-id">郭子豪</span>
+        </div>
+        <div class="car-card-row">可載 <strong>3</strong> 人</div>
+      </div>
+      <div class="car-card" style="border-left-color:var(--muted)">
+        <div class="car-card-top">
+          <span class="car-card-name">攝影車</span>
+          <span class="car-id">歐峻名</span>
+        </div>
+        <div class="car-card-row" style="color:var(--muted);font-style:italic;">載客數待確認</div>
+      </div>
+      <div class="car-card" style="border-left-color:var(--muted)">
+        <div class="car-card-top">
+          <span class="car-card-name">燈光車</span>
+          <span class="car-id">林暐軒</span>
+        </div>
+        <div class="car-card-row" style="color:var(--muted);font-style:italic;">載客數待確認</div>
+      </div>
+    </div>
+
+    <!-- 天氣 -->
+    <div class="sh" style="margin-top:40px"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-box">
+      <div class="weather-icon">☀️</div>
+      <div class="weather-info">
+        <div class="weather-title">天氣晴・大太陽</div>
+        <div class="weather-desc">05/17（日）宜蘭縣 · 外景全日拍攝</div>
+      </div>
+    </div>
+    <div class="weather-alert">
+      ☀️ 大太陽注意防曬・補水・防中暑，請自備帽子及防曬品。
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ SCHEDULE ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="schedule">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+
+    <!-- 桌機版 -->
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead>
+          <tr>
+            <th>時間</th>
+            <th>類型</th>
+            <th>場次</th>
+            <th>地點</th>
+            <th>內容</th>
+            <th>演員</th>
+            <th>用時</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 妝髮 -->
+          <tr class="r-makeup">
+            <td class="t-time">09:00 — 09:40</td>
+            <td><span class="sb" style="background:rgba(176,96,144,.15);color:#804060;border:1px solid rgba(176,96,144,.35);">妝髮</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td class="t-desc">交妝：和民 20min ／ 蛋寶 20min</td>
+            <td class="t-cast">和民<br>蛋寶</td>
+            <td class="t-dur">40 min</td>
+          </tr>
+
+          <!-- 轉場 -->
+          <tr class="r-prep">
+            <td class="t-time">09:40 — 11:10</td>
+            <td><span class="sb sb-prep">移動</span></td>
+            <td>—</td>
+            <td colspan="2">轉場至宜蘭小溪</td>
+            <td>—</td>
+            <td class="t-dur">90 min</td>
+          </tr>
+
+          <!-- S12B -->
+          <tr>
+            <td class="t-time">11:10 — 13:10</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 12B</td>
+            <td class="t-loc">橋下小溪邊</td>
+            <td class="t-desc">（蒙太奇）日・外　TC 9:10　0.1p／5顆<br>阿肥、和民在小溪邊尿尿，互相逗弄、打水漂</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-dur">120 min</td>
+          </tr>
+          <tr class="r-props">
+            <td colspan="7">
+              <div class="props-note">
+                <span class="pn-tag">陳設</span>車內陳設組・後斗滿
+                <span class="pn-tag">道具</span>1500ml 礦泉水・600ml 礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片
+                <span class="pn-tag">特道</span>阿肥的畫
+                <span class="pn-tag">收音</span>同步錄音・單收輪胎駛過碎石路
+                <span class="pn-tag">備註</span>紀錄 match cut 鏡頭數值
+              </div>
+            </td>
+          </tr>
+
+          <!-- S12C -->
+          <tr>
+            <td class="t-time">13:10 — 13:50</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 12C</td>
+            <td class="t-loc">小溪橋旁道路</td>
+            <td class="t-desc">（蒙太奇）日・外　TC 9:35　0.1p／3顆<br>阿肥在車上睡著，和民欣慰看著</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-dur">40 min</td>
+          </tr>
+          <tr class="r-props">
+            <td colspan="7">
+              <div class="props-note">
+                <span class="pn-tag">陳設</span>車內陳設組・後斗滿
+                <span class="pn-tag">道具</span>1500ml 礦泉水・600ml 礦泉水・手套・隨身聽・音源線・和民手機
+                <span class="pn-tag">特道</span>尿尿瓶・石頭（現場）
+                <span class="pn-tag">收音</span>同步錄音
+              </div>
+            </td>
+          </tr>
+
+          <!-- 午餐 -->
+          <tr class="r-lunch">
+            <td class="t-time">13:50 — 14:20</td>
+            <td><span class="sb sb-lunch">午餐</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>午餐休息</td>
+            <td>—</td>
+            <td class="t-dur">30 min</td>
+          </tr>
+
+          <!-- S11 -->
+          <tr>
+            <td class="t-time">14:20 — 15:00</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 11</td>
+            <td class="t-loc">貨車上</td>
+            <td class="t-desc">（蠟筆）日・外　阿肥在車上用蠟筆畫畫</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-dur">40 min</td>
+          </tr>
+          <tr class="r-props">
+            <td colspan="7">
+              <div class="props-note">
+                <span class="pn-tag">陳設</span>車內陳設組・後斗滿
+                <span class="pn-tag">道具</span>礦泉水・手套・隨身聽・音源線・和民手機・蠟筆・紙箱碎片
+                <span class="pn-tag">特道</span>阿肥的畫
+                <span class="pn-tag">播歌</span>排練播放《放手追夢》（製片音響）
+                <span class="pn-tag">收音</span>同步錄音
+              </div>
+            </td>
+          </tr>
+
+          <!-- open / S5B -->
+          <tr>
+            <td class="t-time">15:00 — 17:20</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 5B<br><span style="font-size:10px;color:var(--muted);font-weight:400;">（open）</span></td>
+            <td class="t-loc">貨車上</td>
+            <td class="t-desc">日・外　TC 6:10　0.2p／6顆<br>貨車開上路，父子聽著《打拼人》搖擺</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-dur">90 min</td>
+          </tr>
+          <tr class="r-props">
+            <td colspan="7">
+              <div class="props-note">
+                <span class="pn-tag">陳設</span>車內陳設組・後斗空
+                <span class="pn-tag">道具</span>1500ml 礦泉水・600ml 礦泉水・手套・隨身聽・音源線・和民手機
+                <span class="pn-tag">收音</span>同步錄音・單收：引擎發動
+              </div>
+            </td>
+          </tr>
+
+          <!-- 回程 -->
+          <tr class="r-wrap">
+            <td class="t-time">17:20 —</td>
+            <td><span class="sb sb-wrap">收工</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>回程・轉點收工</td>
+            <td>—</td>
+            <td class="t-dur">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 手機版行程卡片 -->
+    <div class="sch-cards">
+      <div class="sc-prep" style="border-left-color:#B06090;background:#FDF0F6;">
+        <div class="sc-prep-time" style="color:#804060;">09:00 — 09:40</div>
+        <div class="sc-prep-text">💄 妝髮・和民 20min ／ 蛋寶 20min</div>
+      </div>
+
+      <div class="sc-prep">
+        <div class="sc-prep-time">09:40 — 11:10</div>
+        <div class="sc-prep-text">移動・轉場至宜蘭小溪</div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 12B</span>
+            <span class="sc-mloc">橋下小溪邊</span>
+          </div>
+          <span class="sc-mtime">11:10 — 13:10</span>
+        </div>
+        <div class="sc-mtags">
+          <span class="tag t-day">日</span><span class="tag t-ext">外</span>
+          <span style="font-size:11px;color:var(--muted);">TC 9:10 · 0.1p / 5顆</span>
+        </div>
+        <div class="sc-mdesc">阿肥、和民在小溪邊尿尿，互相逗弄、打水漂</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast">
+            <span class="cast-tag">阿肥</span><span class="cast-tag">和民</span>
+          </div>
+          <div class="sc-mstats">
+            <span class="sc-mstat">用時 <span>120分</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 12C</span>
+            <span class="sc-mloc">小溪橋旁道路</span>
+          </div>
+          <span class="sc-mtime">13:10 — 13:50</span>
+        </div>
+        <div class="sc-mtags">
+          <span class="tag t-day">日</span><span class="tag t-ext">外</span>
+          <span style="font-size:11px;color:var(--muted);">TC 9:35 · 0.1p / 3顆</span>
+        </div>
+        <div class="sc-mdesc">阿肥在車上睡著，和民欣慰看著</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast">
+            <span class="cast-tag">阿肥</span><span class="cast-tag">和民</span>
+          </div>
+          <div class="sc-mstats">
+            <span class="sc-mstat">用時 <span>40分</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-mcard lunch-card">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mloc">午餐休息</span>
+          </div>
+          <span class="sc-mtime">13:50 — 14:20</span>
+        </div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 11</span>
+            <span class="sc-mloc">貨車上</span>
+          </div>
+          <span class="sc-mtime">14:20 — 15:00</span>
+        </div>
+        <div class="sc-mtags">
+          <span class="tag t-day">日</span><span class="tag t-ext">外</span>
+          <span style="font-size:11px;color:var(--muted);">蠟筆</span>
+        </div>
+        <div class="sc-mdesc">阿肥在車上用蠟筆畫畫</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast">
+            <span class="cast-tag">阿肥</span><span class="cast-tag">和民</span>
+          </div>
+          <div class="sc-mstats">
+            <span class="sc-mstat">用時 <span>40分</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 5B</span>
+            <span class="sc-mloc">貨車上</span>
+          </div>
+          <span class="sc-mtime">15:00 — 17:20</span>
+        </div>
+        <div class="sc-mtags">
+          <span class="tag t-day">日</span><span class="tag t-ext">外</span>
+          <span style="font-size:11px;color:var(--muted);">TC 6:10 · 0.2p / 6顆 · open</span>
+        </div>
+        <div class="sc-mdesc">貨車開上路，父子聽著《打拼人》搖擺</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast">
+            <span class="cast-tag">阿肥</span><span class="cast-tag">和民</span>
+          </div>
+          <div class="sc-mstats">
+            <span class="sc-mstat">用時 <span>90分</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-prep" style="border-left-color:var(--red);background:#FFF0EA;">
+        <div class="sc-prep-time">17:20 —</div>
+        <div class="sc-prep-text">回程・轉點收工</div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ══ LOCATION ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="location">
+    <div class="sh"><h2>📍 現場資訊</h2></div>
+    <div class="loc-grid">
+      <div class="loc-card">
+        <div class="loc-info">
+          <div class="loc-name">第一現場｜橋下小溪邊</div>
+          <div class="loc-time">S12B・S12C 拍攝地點</div>
+          <div class="loc-sub">宜蘭縣 · 小溪橋下</div>
+          <a class="ext-link" href="https://maps.app.goo.gl/tENzb3W5RavLPNaM7" target="_blank">
+            🗺 Google Maps →
+          </a>
+        </div>
+      </div>
+      <div class="loc-card">
+        <div class="loc-info">
+          <div class="loc-name">第二現場｜路途中抓拍</div>
+          <div class="loc-time">open（S5B）・S11 拍攝地點</div>
+          <div class="loc-sub">暫定路途中抓拍，地點待確認</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ COSTUME ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="costume">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-group-title">阿肥 · 和民</div>
+    <div class="si-grid">
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDdmn_Lns0dmBFUckZEDXHoJOxmDJZAALLFWsboyr5V5zS6s3YeBI3AQADAgADdwADOwQ.jpeg"
+             alt="阿肥 外出服 全身">
+        <div class="si-label">
+          <div class="sn">阿肥 · 外出服 · 全身</div>
+          <div class="st">陳昱安（蛋寶）</div>
+        </div>
+      </div>
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDcWn_LlLruOCFif4lXkNbQaE-oVGOAALFFWsboyr5V_AzAU9ZgYhgAQADAgADdwADOwQ.jpeg"
+             alt="和民 外出服 特寫">
+        <div class="si-label">
+          <div class="sn">和民 · 外出服 · 特寫</div>
+          <div class="st">林沫呈</div>
+        </div>
+      </div>
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDcmn_Llr_LWz0FK00bZGx3PYpZ-JRAALGFWsboyr5V0PUowKKnNIVAQADAgADdwADOwQ.jpeg"
+             alt="和民 外出服 全身">
+        <div class="si-label">
+          <div class="sn">和民 · 外出服 · 全身</div>
+          <div class="st">林沫呈</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="school">國立臺灣藝術大學 電影系碩士班</div>
+      <div class="film">《貨車男孩》</div>
+      <div class="info">補拍 · 2026.05.17 (日) · 宜蘭外景</div>
+    </div>
+    <div class="footer-right">
+      <div class="dir">導演　林沫呈</div>
+      <div class="org">現場製片　郭子豪</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
