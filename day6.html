@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《貨車男孩》補拍通告 — DAY 6 真殺青</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="貨車男孩">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:       #D4960C;
+      --amber:      #A06800;
+      --amber-lt:   #C48000;
+      --blue:       #1A6A9E;
+      --green:      #1E7A40;
+      --red:        #C03208;
+      --text:       #1A0E04;
+      --sub:        #4A3A28;
+      --muted:      #8A7A60;
+      --border:     rgba(0,0,0,0.12);
+      --border-sm:  rgba(0,0,0,0.06);
+      --white:      #FFFFFF;
+      --off-white:  #FFFBF5;
+      --shadow:     0 2px 12px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--gold);
+      color: var(--text);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+
+    /* ─── COVER HERO ── */
+    #cover-hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 20px 60px;
+      position: relative;
+    }
+    #cover-hero img.cover-img {
+      width: min(560px, 92vw);
+      display: block; border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .cover-label { margin-top: 28px; text-align: center; }
+    .cover-label .cl-day {
+      font-size: 11px; font-weight: 900; letter-spacing: .22em;
+      color: var(--white); background: rgba(0,0,0,.45);
+      padding: 4px 16px; display: inline-block; margin-bottom: 12px;
+    }
+    .cover-label .cl-title { font-size: clamp(22px,5vw,36px); font-weight: 900; color: var(--text); }
+    .cover-label .cl-sub { font-size: 14px; color: var(--sub); margin-top: 6px; letter-spacing: .06em; }
+    .scroll-hint {
+      position: absolute; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      opacity: .55; animation: bounce 1.8s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size: 11px; letter-spacing: .15em; color: var(--sub); }
+    .scroll-hint svg  { width: 18px; color: var(--sub); }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ─── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; padding: 0 20px;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-brand {
+      font-size: 13px; font-weight: 900; color: var(--text);
+      white-space: nowrap; padding: 15px 18px 15px 0;
+      border-right: 1px solid var(--border); margin-right: 4px; flex-shrink: 0;
+    }
+    .nav-link {
+      padding: 15px 14px; color: var(--sub);
+      text-decoration: none; font-size: 13px; font-weight: 500;
+      white-space: nowrap; letter-spacing: .04em;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover { color: var(--text); border-bottom-color: var(--gold); }
+
+    /* ─── SECTION PANEL ── */
+    .section-panel {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+    }
+    .section-panel::after {
+      content: '';
+      position: absolute; bottom: 14px; right: 18px;
+      width: 110px; height: 73px;
+      background: url('https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHmnwWa-Ybnu5cM52uPZXx54DJtqLAALAD2sbE7WBV4vs7qMOZuE4AQADAgADdwADOwQ.png')
+                  center / contain no-repeat;
+      pointer-events: none;
+    }
+    .section-panel + .section-panel { margin-top: 12px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 100px; }
+
+    /* ─── DAY HERO ── */
+    .day-hero { background: var(--white); box-shadow: var(--shadow); padding: 48px 24px 40px; }
+    .day-hero-inner { max-width: 1000px; margin: 0 auto; }
+    .badge {
+      display: inline-block; background: var(--gold); color: var(--white);
+      font-size: 10px; font-weight: 900; letter-spacing: .18em; padding: 4px 14px; margin-bottom: 14px;
+    }
+    .badge-final { background: var(--red); }
+    .day-title { font-size: clamp(26px,6vw,46px); font-weight: 900; line-height: 1.2; color: var(--text); }
+    .day-sub   { font-size: 15px; color: var(--sub); margin-top: 6px; }
+    .day-meta  { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; }
+    .meta { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--sub); }
+    .meta strong { color: var(--text); font-weight: 700; }
+
+    /* ─── SECTION HEADING ── */
+    .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .sh h2 { font-size: 17px; font-weight: 900; color: var(--text); white-space: nowrap; padding-left: 12px; border-left: 4px solid var(--gold); }
+    .sh::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ─── CALLTIME ── */
+    .calltime-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+    }
+    .ct-box { border: 2px solid var(--gold); padding: 18px 20px; text-align: center; }
+    .ct-box.makeup-box { border-color: #B06090; }
+    .ct-label { font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--amber); margin-bottom: 8px; }
+    .makeup-box .ct-label { color: #804060; }
+    .ct-time { font-size: 36px; font-weight: 900; color: var(--text); line-height: 1; }
+    .ct-who  { font-size: 13px; color: var(--sub); margin-top: 8px; }
+    .calltime-note {
+      margin-top: 16px; background: #FFF8E6;
+      border: 1px solid rgba(160,104,0,.2); border-left: 3px solid var(--amber);
+      padding: 12px 16px; font-size: 13px; color: var(--sub); line-height: 1.65;
+    }
+    .calltime-note strong { color: var(--text); }
+
+    /* ─── CREW ── */
+    .crew-section {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px 32px;
+    }
+    .crew-dept-title {
+      font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--amber);
+      border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 2px;
+    }
+    .crew-row { display: flex; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border-sm); }
+    .crew-row:last-child { border-bottom: none; }
+    .crew-role { width: 80px; flex-shrink: 0; font-size: 11px; color: var(--muted); }
+    .crew-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--text); }
+    .crew-emg {
+      font-size: 9px; font-weight: 900; letter-spacing: .06em;
+      background: var(--red); color: var(--white);
+      padding: 1px 5px; margin-left: 4px; flex-shrink: 0;
+    }
+    .crew-phone {
+      font-size: 12px; font-weight: 700; color: var(--amber);
+      text-decoration: none; white-space: nowrap;
+    }
+    .crew-phone:hover { color: var(--amber-lt); }
+
+    /* ─── WEATHER ── */
+    .weather-box {
+      background: #FFFBF0; border: 1px solid rgba(160,104,0,.2);
+      padding: 20px 24px; display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;
+    }
+    .weather-icon { font-size: 48px; line-height: 1; }
+    .weather-info { flex: 1; }
+    .weather-title { font-size: 20px; font-weight: 900; color: var(--text); margin-bottom: 10px; }
+    .weather-rows  { display: flex; flex-direction: column; gap: 6px; }
+    .weather-row   { display: flex; gap: 10px; font-size: 13px; align-items: baseline; }
+    .weather-key   { width: 90px; flex-shrink: 0; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+    .weather-val   { color: var(--text); font-weight: 500; }
+    .weather-alert {
+      background: #FFF0EA; border: 1px solid rgba(200,58,10,.25);
+      border-left: 3px solid var(--red);
+      padding: 10px 14px; font-size: 13px; color: var(--text); line-height: 1.6; margin-top: 12px;
+    }
+
+    /* ─── SCHEDULE TABLE ── */
+    .sch-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); }
+    .sch { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 680px; }
+    .sch thead tr { background: #FFF8E6; border-bottom: 2px solid var(--border); }
+    .sch thead th {
+      color: var(--amber); font-size: 10px; font-weight: 900;
+      letter-spacing: .14em; padding: 10px 12px; text-align: left; white-space: nowrap;
+    }
+    .sch tbody tr { border-bottom: 1px solid var(--border-sm); }
+    .sch tbody tr:last-child { border-bottom: none; }
+    .sch tbody tr td         { background: #FFFFFF; }
+    .sch tbody tr.r-prep td  { background: #F5F5F5; color: var(--sub); }
+    .sch tbody tr.r-lunch td { background: #F0F7F2; }
+    .sch tbody tr.r-wrap td  { background: #FFF0EC; }
+    .sch tbody tr.r-final td { background: #FFF8E6; }
+    .sch td { padding: 11px 12px; vertical-align: middle; line-height: 1.55; }
+    .t-time  { font-size: 12px; font-weight: 700; color: var(--amber); white-space: nowrap; }
+    .t-scene { font-weight: 900; font-size: 14px; white-space: nowrap; color: var(--amber); }
+    .t-loc   { min-width: 90px; font-weight: 600; }
+    .t-desc  { min-width: 160px; font-size: 13px; line-height: 1.6; }
+    .t-cast  { min-width: 80px; font-size: 12px; line-height: 1.7; }
+    .t-pg    { white-space: nowrap; font-size: 12px; color: var(--sub); }
+
+    .sb { display: inline-block; font-size: 10px; font-weight: 900; padding: 2px 8px; letter-spacing: .06em; white-space: nowrap; }
+    .sb-shoot { background: var(--amber); color: var(--white); }
+    .sb-prep  { background: rgba(154,128,112,.2); color: var(--muted); border: 1px solid rgba(154,128,112,.3); }
+    .sb-lunch { background: rgba(107,184,122,.15); color: var(--green); border: 1px solid rgba(107,184,122,.3); }
+    .sb-wrap  { background: rgba(212,80,30,.15); color: var(--red); border: 1px solid rgba(212,80,30,.3); }
+    .sb-final { background: var(--gold); color: var(--white); }
+
+    /* 道具備註列 */
+    .r-props td { padding: 0 !important; }
+    .props-note {
+      font-size: 11.5px; color: var(--muted); line-height: 1.7;
+      padding: 7px 16px 10px 32px;
+      background: #F9F7F4; border-left: 3px solid #DDD6C8;
+    }
+    .pn-tag {
+      display: inline-block; font-size: 10px; font-weight: 900;
+      letter-spacing: .08em; color: var(--amber);
+      background: #FFF3D0; padding: 1px 6px; border-radius: 3px; margin-right: 4px;
+    }
+
+    /* 手機版 */
+    .sch-cards { display: none; }
+    @media (max-width: 700px) {
+      .sch-wrap  { display: none; }
+      .sch-cards { display: flex; flex-direction: column; gap: 0; }
+    }
+    .sc-prep {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-left: 3px solid var(--border);
+      background: #F9F7F4; margin-bottom: 6px;
+    }
+    .sc-prep-time { flex-shrink: 0; width: 96px; font-size: 11px; font-weight: 700; color: var(--amber); padding-top: 2px; }
+    .sc-prep-text { font-size: 13px; color: var(--sub); line-height: 1.65; }
+    .sc-mcard {
+      background: #FFFFFF; border: 1px solid var(--border);
+      border-left: 4px solid var(--amber); padding: 14px 16px; margin-bottom: 8px;
+    }
+    .sc-mcard.lunch-card { border-left-color: var(--green); background: #F0F7F2; }
+    .sc-mcard.wrap-card  { border-left-color: var(--red); background: #FFF0EA; }
+    .sc-mcard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .sc-mcard-left { display: flex; align-items: center; gap: 10px; }
+    .sc-mnum { background: var(--amber); color: var(--white); font-size: 11px; font-weight: 900; padding: 3px 10px; }
+    .sc-mloc  { font-size: 15px; font-weight: 700; }
+    .sc-mtime { font-size: 12px; font-weight: 700; color: var(--amber); white-space: nowrap; }
+    .sc-mtags { display: flex; gap: 6px; margin-bottom: 8px; }
+    .tag { font-size: 11px; padding: 2px 8px; border: 1px solid; letter-spacing: .04em; white-space: nowrap; display: inline-block; }
+    .t-day  { border-color: var(--amber); color: var(--amber); }
+    .t-ext  { border-color: var(--green); color: var(--green); }
+    .sc-mdesc { font-size: 14px; line-height: 1.65; color: var(--text); padding: 8px 10px; background: rgba(0,0,0,.04); border-left: 2px solid var(--border); margin-bottom: 8px; }
+    .sc-mfoot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .sc-mcast { display: flex; gap: 6px; flex-wrap: wrap; }
+    .cast-tag { font-size: 12px; padding: 3px 10px; background: #FFF3D0; border: 1px solid #C8A020; color: #7A5000; }
+    .sc-mstats { display: flex; gap: 10px; }
+    .sc-mstat { font-size: 11px; color: var(--sub); }
+    .sc-mstat span { color: var(--text); font-weight: 700; }
+
+    /* ─── LOCATION ── */
+    .loc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .loc-card { background: #FFFFFF; border: 1px solid var(--border); overflow: hidden; }
+    .loc-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .loc-info  { padding: 16px; }
+    .loc-name  { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .loc-time  { font-size: 13px; color: var(--amber); margin-bottom: 6px; font-weight: 600; }
+    .loc-sub   { font-size: 13px; color: var(--muted); }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 13px; color: var(--blue); text-decoration: none;
+      margin-top: 8px; transition: opacity .2s;
+    }
+    .ext-link:hover { opacity: .75; text-decoration: underline; }
+
+    /* 休息區 */
+    .rest-box {
+      background: #F0F7F2; border: 1px solid rgba(30,122,64,.2);
+      border-left: 3px solid var(--green);
+      padding: 16px 20px; margin-top: 16px;
+      display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;
+    }
+    .rest-box img { width: 180px; height: 120px; object-fit: cover; flex-shrink: 0; border-radius: 2px; }
+    .rest-info { flex: 1; }
+    .rest-title { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+    .rest-desc  { font-size: 13px; color: var(--sub); line-height: 1.7; }
+
+    /* ─── SI-CARD 定裝照 ── */
+    .si-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .si-card { background: #FFFFFF; border: 1px solid var(--border); overflow: hidden; }
+    .si-card img { width: 100%; display: block; }
+    .si-label { padding: 12px 14px; }
+    .si-label .sn { font-size: 11px; font-weight: 900; color: var(--amber); letter-spacing: .1em; }
+    .si-label .st { font-size: 14px; font-weight: 700; margin: 3px 0 2px; }
+    .costume-group-title {
+      font-size: 13px; font-weight: 900; color: var(--amber);
+      letter-spacing: .12em; border-bottom: 1px solid var(--border);
+      padding-bottom: 6px; margin-bottom: 14px;
+    }
+
+    /* ─── NOTES ── */
+    .notes { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .notes li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #FFFFFF;
+      border: 1px solid var(--border); border-left: 3px solid var(--red);
+      font-size: 14px; line-height: 1.65;
+    }
+    .notes li .ic { font-size: 18px; flex-shrink: 0; padding-top: 1px; }
+
+    /* ─── 殺青 BANNER ── */
+    .wrap-banner {
+      background: var(--text); color: var(--white);
+      padding: 36px 24px; text-align: center; margin-top: 12px;
+    }
+    .wrap-banner .wb-label { font-size: 11px; font-weight: 900; letter-spacing: .22em; color: var(--gold); margin-bottom: 10px; }
+    .wrap-banner .wb-title { font-size: clamp(28px,6vw,52px); font-weight: 900; color: var(--gold); line-height: 1.2; }
+    .wrap-banner .wb-sub   { font-size: 15px; color: #8A7A60; margin-top: 10px; letter-spacing: .06em; }
+
+    /* ─── FAB & WATERMARK ── */
+    #dir-mark {
+      position: fixed; bottom: 20px; right: 20px;
+      font-size: 11px; letter-spacing: .18em; color: rgba(0,0,0,.4);
+      pointer-events: none; z-index: 50; font-weight: 700;
+    }
+    #fab-schedule {
+      position: fixed; bottom: 24px; left: 20px;
+      background: var(--amber); color: var(--white);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px; font-weight: 900; letter-spacing: .08em;
+      padding: 11px 20px; text-decoration: none; z-index: 200;
+      box-shadow: 0 6px 24px rgba(0,0,0,.5); border-radius: 2px;
+      transition: background .2s, transform .2s;
+      display: flex; align-items: center; gap: 7px;
+    }
+    #fab-schedule:hover { background: var(--amber-lt); transform: translateY(-2px); }
+
+    /* ─── FOOTER ── */
+    .footer { background: var(--text); margin-top: 12px; padding: 32px 24px; }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .footer-left .school { font-size: 12px; color: #8A7A60; letter-spacing: .08em; margin-bottom: 4px; }
+    .footer-left .film   { font-size: 20px; font-weight: 900; color: var(--gold); }
+    .footer-left .info   { font-size: 12px; color: #8A7A60; margin-top: 4px; }
+    .footer-right        { text-align: right; }
+    .footer-right .dir   { font-size: 16px; font-weight: 700; color: var(--gold); }
+    .footer-right .org   { font-size: 12px; color: #8A7A60; margin-top: 4px; }
+
+    @media (max-width: 560px) { .sch { font-size: 12px; } .sch td { padding: 9px 10px; } }
+    @media (max-width: 480px) { .rest-box img { width: 100%; height: 160px; } }
+  </style>
+</head>
+<body>
+
+<div id="dir-mark">導演：林沫呈</div>
+<a id="fab-schedule" href="#schedule">📋 查看行程</a>
+
+<div id="main">
+
+  <!-- ══ COVER HERO ══ -->
+  <div id="cover-hero">
+    <img class="cover-img"
+      src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHmnwWa-Ybnu5cM52uPZXx54DJtqLAALAD2sbE7WBV4vs7qMOZuE4AQADAgADdwADOwQ.png"
+      alt="貨車男孩 主視覺">
+    <div class="cover-label">
+      <div class="cl-day">DAY 6 · 2026.05.30 (六) · 真殺青</div>
+      <div class="cl-title">拍攝通告</div>
+      <div class="cl-sub">國立臺灣藝術大學 電影系碩士班 · 導演 林沫呈</div>
+    </div>
+    <div class="scroll-hint">
+      <span>往下滑查看通告</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">《貨車男孩》</div>
+      <a class="nav-link" href="#calltime">通告時間</a>
+      <a class="nav-link" href="#crew">工作人員</a>
+      <a class="nav-link" href="#weather">天氣</a>
+      <a class="nav-link" href="#schedule">拍攝行程</a>
+      <a class="nav-link" href="#location">現場資訊</a>
+      <a class="nav-link" href="#costume">定裝照</a>
+      <a class="nav-link" href="#notes">注意事項</a>
+    </div>
+  </nav>
+
+  <!-- DAY HERO -->
+  <div class="day-hero">
+    <div class="day-hero-inner">
+      <div class="badge badge-final">DAY 6 · 真殺青 · 2026</div>
+      <h1 class="day-title">5 月 30 日（六）宜蘭外景</h1>
+      <p class="day-sub">宜蘭金面里 OPEN</p>
+      <div class="day-meta">
+        <div class="meta">⏰ 整體時程 <strong>08:00 — 16:00</strong></div>
+        <div class="meta">📍 地點 <strong>宜蘭縣</strong></div>
+        <div class="meta">🗺 <a href="https://maps.app.goo.gl/HGkZSxf89tsAJAAy8" target="_blank" style="color:var(--blue);text-decoration:none;">Google Maps →</a></div>
+        <div class="meta">🎬 場次 <strong>OPEN／S11／S12</strong></div>
+        <div class="meta">👥 演員 <strong>阿肥・和民</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CALLTIME ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="calltime">
+    <div class="sh"><h2>⏰ 通告時間</h2></div>
+    <div class="calltime-grid">
+      <div class="ct-box">
+        <div class="ct-label">早餐抵達</div>
+        <div class="ct-time">07:20</div>
+        <div class="ct-who">全體工作人員</div>
+      </div>
+      <div class="ct-box makeup-box">
+        <div class="ct-label">💄 演員梳化</div>
+        <div class="ct-time" style="font-size:28px;">07:00 — 07:40</div>
+        <div class="ct-who">阿肥・和民　｜　梳化老師 立之</div>
+      </div>
+      <div class="ct-box">
+        <div class="ct-label">小隊抵達</div>
+        <div class="ct-time">08:00</div>
+        <div class="ct-who">全體工作人員</div>
+      </div>
+      <div class="ct-box" style="border-color:var(--red);">
+        <div class="ct-label" style="color:var(--red);">🎬 開機</div>
+        <div class="ct-time">08:30</div>
+        <div class="ct-who">第一現場</div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ CREW ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="crew">
+    <div class="sh"><h2>👥 工作人員</h2></div>
+    <div class="crew-section">
+
+      <div>
+        <div class="crew-dept-title">導演組</div>
+        <div class="crew-row">
+          <span class="crew-role">導演</span>
+          <span class="crew-name">林沫呈</span>
+          <a class="crew-phone" href="tel:0989762473">0989-762-473</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">副導</span>
+          <span class="crew-name">張不乙</span>
+          <a class="crew-phone" href="tel:0912967005">0912-967-005</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">場記</span>
+          <span class="crew-name">黃詩婷</span>
+          <a class="crew-phone" href="tel:0965665825">0965-665-825</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">製片組</div>
+        <div class="crew-row">
+          <span class="crew-role">現場製片</span>
+          <span class="crew-name">郭子豪 Jeff<span class="crew-emg">緊急</span></span>
+          <a class="crew-phone" href="tel:0978561223">0978-561-223</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">攝影組</div>
+        <div class="crew-row">
+          <span class="crew-role">攝影</span>
+          <span class="crew-name">歐峻名（香蕉）</span>
+          <a class="crew-phone" href="tel:0966862919">0966-862-919</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">攝大助</span>
+          <span class="crew-name">謝東霖（東東）</span>
+          <a class="crew-phone" href="tel:0968785994">0968-785-994</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">攝助</span>
+          <span class="crew-name">陳守聰（Alex）</span>
+          <a class="crew-phone" href="tel:0965349188">0965-349-188</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">攝影助理</span>
+          <span class="crew-name">陳亞聖（小葉）</span>
+          <a class="crew-phone" href="tel:0913066556">0913-066-556</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="crew-dept-title">收音組</div>
+        <div class="crew-row">
+          <span class="crew-role">收音</span>
+          <span class="crew-name">梁惠宣</span>
+          <a class="crew-phone" href="tel:0972960893">0972-960-893</a>
+        </div>
+        <div class="crew-row">
+          <span class="crew-role">收音助理</span>
+          <span class="crew-name">范維珍</span>
+          <a class="crew-phone" href="tel:0963782751">0963-782-751</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ WEATHER ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="weather">
+    <div class="sh"><h2>🌤 天氣預報</h2></div>
+    <div class="weather-box">
+      <div class="weather-icon">⛅</div>
+      <div class="weather-info">
+        <div class="weather-title">晴時多雲</div>
+        <div class="weather-rows">
+          <div class="weather-row"><span class="weather-key">日期</span><span class="weather-val">05/30（六）宜蘭縣</span></div>
+          <div class="weather-row"><span class="weather-key">溫度</span><span class="weather-val">24°C — 31°C</span></div>
+          <div class="weather-row"><span class="weather-key">降雨機率</span><span class="weather-val" style="color:var(--green);font-weight:700;">極低（約 2% ~ 15%）</span></div>
+          <div class="weather-row"><span class="weather-key">紫外線</span><span class="weather-val" style="color:var(--red);font-weight:700;">指數 10（過量級）</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="weather-alert">
+      ☀️ 紫外線過量級，請務必做好防曬！建議攜帶帽子、防曬乳、袖套。<br>
+      💧 當日太陽炎熱，請注意補水，謹防中暑。
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ SCHEDULE ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="schedule">
+    <div class="sh"><h2>📋 拍攝行程</h2></div>
+
+    <!-- 桌機版 -->
+    <div class="sch-wrap">
+      <table class="sch">
+        <thead>
+          <tr>
+            <th>時間</th>
+            <th>類型</th>
+            <th>場次</th>
+            <th>地點</th>
+            <th>內容／摘要</th>
+            <th>演員</th>
+            <th>頁／顆</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- 早餐・移動 -->
+          <tr class="r-prep">
+            <td class="t-time">07:20 — 08:30</td>
+            <td><span class="sb sb-prep">準備</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>🍳 早餐・技術 Setting・移動至第一現場</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+
+          <!-- OPEN -->
+          <tr>
+            <td class="t-time">08:30 — 10:00</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">OPEN</td>
+            <td class="t-loc">第一現場<br><span style="font-size:11px;color:var(--muted);font-weight:400;">金面里</span></td>
+            <td class="t-desc">日・外<br>貨車開上路，父子聽著《打拼人》搖擺</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-pg">0.2p / 4顆</td>
+          </tr>
+
+          <!-- 轉景 -->
+          <tr class="r-prep">
+            <td class="t-time">10:00 — 10:15</td>
+            <td><span class="sb sb-prep">轉景</span></td>
+            <td>—</td>
+            <td colspan="3">🔄 轉景・技術 Setting</td>
+            <td>—</td>
+          </tr>
+
+          <!-- S11 -->
+          <tr>
+            <td class="t-time">10:15 — 11:45</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 11</td>
+            <td class="t-loc">貨車上<br><span style="font-size:11px;color:var(--muted);font-weight:400;">興農路</span></td>
+            <td class="t-desc">日・外　TC 8:35<br>阿肥拿出美玉送的蠟筆，和民抽出紙箱碎片給阿肥畫圖</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-pg">0.4p / 4顆</td>
+          </tr>
+
+          <!-- 轉景・午餐 -->
+          <tr class="r-prep">
+            <td class="t-time">11:45 — 12:05</td>
+            <td><span class="sb sb-prep">轉景</span></td>
+            <td>—</td>
+            <td colspan="3">🔄 轉景至梗枋橋下休息區</td>
+            <td>—</td>
+          </tr>
+          <tr class="r-lunch">
+            <td class="t-time">12:05 — 12:30</td>
+            <td><span class="sb sb-lunch">午餐</span></td>
+            <td>—</td>
+            <td class="t-loc">梗枋橋下<br>休息區</td>
+            <td class="t-desc">午餐休息<br><a href="https://maps.app.goo.gl/zWQciR7mY3FazoyB9" target="_blank" style="font-size:12px;color:var(--blue);">📍 Map →</a></td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+
+          <!-- S12B -->
+          <tr>
+            <td class="t-time">12:40 — 14:00</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 12B</td>
+            <td class="t-loc">橋下小溪邊<br><span style="font-size:11px;color:var(--muted);font-weight:400;">蒙太奇</span></td>
+            <td class="t-desc">日・外　TC 9:10<br>阿肥、和民在小溪邊尿尿，互相逗弄、打水漂</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-pg">0.1p / 4顆</td>
+          </tr>
+
+          <!-- S12E -->
+          <tr>
+            <td class="t-time">14:15 — 15:45</td>
+            <td><span class="sb sb-shoot">拍攝</span></td>
+            <td class="t-scene">S 12E</td>
+            <td class="t-loc">橋板湖南下<br><span style="font-size:11px;color:var(--muted);font-weight:400;">蒙太奇・車拍</span></td>
+            <td class="t-desc">日・外　TC 10:20<br>貨車經過海邊，和民叫醒阿肥，阿肥趕快拿蠟筆畫下大海景色</td>
+            <td class="t-cast">阿肥<br>和民</td>
+            <td class="t-pg">0.1p / 5顆</td>
+          </tr>
+
+          <!-- 殺青 -->
+          <tr class="r-final">
+            <td class="t-time">16:00</td>
+            <td><span class="sb sb-final">🎬 殺青</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td style="font-weight:700;color:var(--amber);">殺青・場復・收工　感謝全體組員辛苦了！</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 手機版 -->
+    <div class="sch-cards">
+      <div class="sc-prep">
+        <div class="sc-prep-time">07:20 — 08:30</div>
+        <div class="sc-prep-text">🍳 早餐・技術 Setting・移動至第一現場</div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">OPEN</span>
+            <span class="sc-mloc">金面里</span>
+          </div>
+          <span class="sc-mtime">08:30 — 10:00</span>
+        </div>
+        <div class="sc-mtags"><span class="tag t-day">日</span><span class="tag t-ext">外</span><span style="font-size:11px;color:var(--muted);">0.2p / 4顆</span></div>
+        <div class="sc-mdesc">貨車開上路，父子聽著《打拼人》搖擺</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast"><span class="cast-tag">阿肥</span><span class="cast-tag">和民</span></div>
+        </div>
+      </div>
+
+      <div class="sc-prep">
+        <div class="sc-prep-time">10:00 — 10:15</div>
+        <div class="sc-prep-text">🔄 轉景・技術 Setting</div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 11</span>
+            <span class="sc-mloc">貨車上（興農路）</span>
+          </div>
+          <span class="sc-mtime">10:15 — 11:45</span>
+        </div>
+        <div class="sc-mtags"><span class="tag t-day">日</span><span class="tag t-ext">外</span><span style="font-size:11px;color:var(--muted);">TC 8:35 · 0.4p / 4顆</span></div>
+        <div class="sc-mdesc">阿肥拿出美玉送的蠟筆，和民抽出紙箱碎片給阿肥畫圖</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast"><span class="cast-tag">阿肥</span><span class="cast-tag">和民</span></div>
+        </div>
+      </div>
+
+      <div class="sc-prep">
+        <div class="sc-prep-time">11:45 — 12:05</div>
+        <div class="sc-prep-text">🔄 轉景至梗枋橋下休息區</div>
+      </div>
+
+      <div class="sc-mcard lunch-card">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mloc">午餐・梗枋橋下休息區</span>
+          </div>
+          <span class="sc-mtime">12:05 — 12:30</span>
+        </div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 12B</span>
+            <span class="sc-mloc">橋下小溪邊</span>
+          </div>
+          <span class="sc-mtime">12:40 — 14:00</span>
+        </div>
+        <div class="sc-mtags"><span class="tag t-day">日</span><span class="tag t-ext">外</span><span style="font-size:11px;color:var(--muted);">蒙太奇 · TC 9:10 · 0.1p / 4顆</span></div>
+        <div class="sc-mdesc">阿肥、和民在小溪邊尿尿，互相逗弄、打水漂</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast"><span class="cast-tag">阿肥</span><span class="cast-tag">和民</span></div>
+        </div>
+      </div>
+
+      <div class="sc-mcard">
+        <div class="sc-mcard-top">
+          <div class="sc-mcard-left">
+            <span class="sc-mnum">S 12E</span>
+            <span class="sc-mloc">橋板湖南下</span>
+          </div>
+          <span class="sc-mtime">14:15 — 15:45</span>
+        </div>
+        <div class="sc-mtags"><span class="tag t-day">日</span><span class="tag t-ext">外</span><span style="font-size:11px;color:var(--muted);">蒙太奇 · TC 10:20 · 0.1p / 5顆</span></div>
+        <div class="sc-mdesc">貨車經過海邊，和民叫醒阿肥，阿肥趕快拿蠟筆畫下大海景色</div>
+        <div class="sc-mfoot">
+          <div class="sc-mcast"><span class="cast-tag">阿肥</span><span class="cast-tag">和民</span></div>
+        </div>
+      </div>
+
+      <div class="sc-prep" style="border-left-color:var(--gold);background:#FFF8E6;">
+        <div class="sc-prep-time" style="color:var(--gold);font-size:12px;">16:00</div>
+        <div class="sc-prep-text" style="font-weight:700;color:var(--amber);">🎬 殺青・場復・收工</div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ══ LOCATION ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="location">
+    <div class="sh"><h2>📍 現場資訊</h2></div>
+    <div class="loc-grid">
+
+      <div class="loc-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDyWoWYj6SrZ9dGPMurhe4zM9tP2uVAAKtD2sbDNm4VJGZT0qKnZ0NAQADAgADdwADOwQ.png" alt="第一現場 金面里">
+        <div class="loc-info">
+          <div class="loc-name">第一現場｜金面里</div>
+          <div class="loc-time">OPEN · 08:30 — 10:00</div>
+          <div class="loc-sub">宜蘭縣</div>
+          <a class="ext-link" href="https://maps.app.goo.gl/HGkZSxf89tsAJAAy8" target="_blank">🗺 Google Maps →</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDymoWYnhY7NoZKqSrrotsOEQTg8vPAAKuD2sbDNm4VG4mvW1j-LZrAQADAgADdwADOwQ.png" alt="第二現場 福成路">
+        <div class="loc-info">
+          <div class="loc-name">第二現場｜福成路</div>
+          <div class="loc-time">S11 · 10:15 — 11:45</div>
+          <div class="loc-sub">宜蘭縣</div>
+          <a class="ext-link" href="https://maps.app.goo.gl/mJujD2tbZerd2DNN6" target="_blank">🗺 Google Maps →</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDCWndFm5P-Aj9Sv0gI-Uju9HCVzuIAAKbDWsb-rvpVnFHqLkCObOvAQADAgADdwADOwQ.jpg" alt="第三現場 梗枋橋下">
+        <div class="loc-info">
+          <div class="loc-name">第三現場｜梗枋橋下</div>
+          <div class="loc-time">S12B · 12:40 — 14:00</div>
+          <div class="loc-sub">宜蘭縣</div>
+          <a class="ext-link" href="https://maps.app.goo.gl/wW3QdsbupAdAUjpN6" target="_blank">🗺 Google Maps →</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-info" style="padding-top:24px;">
+          <div class="loc-name">第四現場｜車拍</div>
+          <div class="loc-time">S12E · 14:15 — 15:45</div>
+          <div class="loc-sub">橋板湖南下路段</div>
+          <a class="ext-link" href="https://maps.app.goo.gl/A2rEqk6mzdNBiZTbA" target="_blank">🗺 Google Maps →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 休息區 -->
+    <div class="rest-box">
+      <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDy2oWYqOXCiojjPG2AAEwn79z4ZjWFQACrw9rGwzZuFSTDmEn-Uq9tgEAAwIAA3cAAzsE.png" alt="梗枋橋下休息區">
+      <div class="rest-info">
+        <div class="rest-title">🍱 午餐休息區｜梗枋橋下休息區</div>
+        <div class="rest-desc">
+          用餐時間：12:05 — 12:30<br>
+          <a href="https://maps.app.goo.gl/zWQciR7mY3FazoyB9" target="_blank" style="color:var(--blue);font-size:13px;">📍 Google Maps →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ══ COSTUME ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="costume">
+    <div class="sh"><h2>👗 定裝照</h2></div>
+    <div class="costume-group-title">阿肥 · 和民</div>
+    <div class="si-grid">
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDdmn_Lns0dmBFUckZEDXHoJOxmDJZAALLFWsboyr5V5zS6s3YeBI3AQADAgADdwADOwQ.jpeg" alt="阿肥 外出服 全身">
+        <div class="si-label">
+          <div class="sn">阿肥 · 外出服 · 全身</div>
+          <div class="st">陳昱安（蛋寶）</div>
+        </div>
+      </div>
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDcWn_LlLruOCFif4lXkNbQaE-oVGOAALFFWsboyr5V_AzAU9ZgYhgAQADAgADdwADOwQ.jpeg" alt="和民 外出服 特寫">
+        <div class="si-label">
+          <div class="sn">和民 · 外出服 · 特寫</div>
+          <div class="st">林沫呈</div>
+        </div>
+      </div>
+      <div class="si-card">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDcmn_Llr_LWz0FK00bZGx3PYpZ-JRAALGFWsboyr5V0PUowKKnNIVAQADAgADdwADOwQ.jpeg" alt="和民 外出服 全身">
+        <div class="si-label">
+          <div class="sn">和民 · 外出服 · 全身</div>
+          <div class="st">林沫呈</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ══ NOTES ══ -->
+  <div class="section-panel" style="margin-top:12px">
+  <div class="wrap" id="notes">
+    <div class="sh"><h2>⚠️ 注意事項</h2></div>
+    <ul class="notes">
+      <li>
+        <span class="ic">🚬</span>
+        <span>有 <strong>蛋寶</strong> 在場的任何地方，<strong>禁止吸菸（含電子菸）</strong>。</span>
+      </li>
+      <li>
+        <span class="ic">🚬</span>
+        <span>菸蒂請勿亂丟，請集中丟棄於垃圾袋。</span>
+      </li>
+      <li>
+        <span class="ic">🦟</span>
+        <span>現場蚊子較多，請找製片組噴噴。</span>
+      </li>
+      <li>
+        <span class="ic">💧</span>
+        <span>請務必注意補水，當日太陽炎熱，紫外線過量級，請攜帶防曬品。</span>
+      </li>
+    </ul>
+  </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- 殺青 BANNER -->
+<div class="wrap-banner">
+  <div class="wb-label">2026 · 國立臺灣藝術大學 電影系碩士班</div>
+  <div class="wb-title">🎬 真殺青</div>
+  <div class="wb-sub">感謝全體組員辛苦了！《貨車男孩》</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="school">國立臺灣藝術大學 電影系碩士班</div>
+      <div class="film">《貨車男孩》</div>
+      <div class="info">DAY 6 · 真殺青 · 2026.05.30 (六) · 宜蘭外景</div>
+    </div>
+    <div class="footer-right">
+      <div class="dir">導演　林沫呈</div>
+      <div class="org">現場製片　郭子豪</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
